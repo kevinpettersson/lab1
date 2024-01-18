@@ -1,21 +1,25 @@
 import java.awt.*;
 
-public class Saab95{
+public class Saab95 implements Car{
 
-    public boolean turboOn;
-    public int nrDoors; // Number of doors on the car
-    public double enginePower; // Engine power of the car
-    public double currentSpeed; // The current speed of the car
-    public Color color; // Color of the car
-    public String modelName; // The car model name
+    private final int nrDoors;
+    private final String modelName;
+    private final double enginePower;
+    private double currentSpeed;
+    private boolean turboOn;
+    private Color color;
     
-    public Saab95(){
-        nrDoors = 2;
-        color = Color.red;
-        enginePower = 125;
-	    turboOn = false;
-        modelName = "Saab95";
+    public Saab95(int nrDoors, double enginePower, double currentSpeed, Color color, String modelName){
+        this.nrDoors = 2;
+        this.color = Color.red;
+        this.enginePower = 125;
+	    this.turboOn = false;
+        this.modelName = "Saab95";
         stopEngine();
+    }
+
+    public String getModelName(){
+        return modelName;
     }
     
     public int getNrDoors(){
