@@ -1,13 +1,6 @@
 import java.awt.*;
 public interface Car {
 
-    public int getNrDoors();
-    public double getEnginePower();
-
-    public double getCurrentSpeed();
-
-    public Color getColor();
-
     public void setColor(Color clr);
 
     public void startEngine();

@@ -11,9 +11,9 @@ public class Saab95 implements Car{
     
     public Saab95(int nrDoors, double enginePower, double currentSpeed, Color color, String modelName){
         this.nrDoors = 2;
-        this.color = Color.red;
+        this.color = color; //
         this.enginePower = 125;
-	    this.turboOn = false;
+	    this.turboOn = false; //Turbo off by default.
         this.modelName = "Saab95";
         stopEngine();
     }

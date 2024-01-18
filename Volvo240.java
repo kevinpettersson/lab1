@@ -2,7 +2,8 @@ import java.awt.*;
 
 public class Volvo240 implements Car{
 
-    private final static double trimFactor = 1.25;
+    private static double trimFactor = 1.25;
+
     private final int nrDoors;
     private final double enginePower;
     private double currentSpeed;
@@ -11,7 +12,7 @@ public class Volvo240 implements Car{
     
     public Volvo240 (int nrDoors, double enginePower, double currentSpeed, Color color, String modelName){
         this.nrDoors = 4;
-        this.color = Color.black;
+        this.color = color;
         this.enginePower = 100;
         this.modelName = "Volvo240";
         stopEngine();
