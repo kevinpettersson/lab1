@@ -1,6 +1,6 @@
 import java.awt.*;
 import java.lang.Math;
-public abstract class Car {
+public abstract class Car implements Movable {
 
     final int nrDoors;              //Number of door will never change for a specific car
     final double enginePower;       //Engine power is a set number
@@ -18,20 +18,22 @@ public abstract class Car {
         this.color = color;
         this.modelName = modelName;
         this.position = new int[]{0,0};
-        this.heading = 0;
+        this.heading = 90;                 //Unit circle "north"
     }
 
-    public int turnLeft2(int degree) {
-        return Math.abs((heading - degree)% 360);
+
+
+    public void turnLeft(int degree) {
+        this.heading =  Math.abs((heading - degree)% 360);
     }
 
-    public int turnRight2(int degree) {
-        return Math.abs((heading + degree) % 360);
+    public void turnRight(int degree) {
+        this.heading = Math.abs((heading + degree)% 360);
     }
 
    public void move() {
-       this.position[0] = (int) (this.position[0] + Math.cos(heading)*currentSpeed);
-       this.position[1] = (int) (this.position[1] + Math.cos(heading)*currentSpeed);
+       this.position[0] = (int) (this.position[0] + Math.cos(Math.toRadians(heading))*currentSpeed);
+       this.position[1] = (int) (this.position[1] + Math.sin(Math.toRadians(heading))*currentSpeed);
    }
 
     public String getModelName(){
