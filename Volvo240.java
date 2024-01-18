@@ -1,40 +1,13 @@
 import java.awt.*;
 
-public class Volvo240 implements Car{
+public class Volvo240 extends Car{
 
     private static double trimFactor = 1.25;
-
-    private final int nrDoors;
-    private final double enginePower;
-    private double currentSpeed;
-    private Color color;
-    private final String modelName;
-    
-    public Volvo240 (int nrDoors, double enginePower, double currentSpeed, Color color, String modelName){
-        this.nrDoors = 4;
-        this.color = color;
-        this.enginePower = 100;
-        this.modelName = "Volvo240";
+    public Volvo240 (){
+        super(4, 100, Color.red, "Volov240");
         stopEngine();
     }
 
-    public String getModelName(){
-        return modelName;
-    }
-    public int getNrDoors(){
-        return nrDoors;
-    }
-    public double getEnginePower(){
-        return enginePower;
-    }
-
-    public double getCurrentSpeed(){
-        return currentSpeed;
-    }
-
-    public Color getColor(){
-        return color;
-    }
 
     public void setColor(Color clr){
 	    color = clr;

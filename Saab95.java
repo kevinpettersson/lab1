@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public class Saab95 implements Car {
+public class Saab95 extends Car {
 
     private final int nrDoors;
     private final String modelName;
@@ -9,44 +9,13 @@ public class Saab95 implements Car {
     private boolean turboOn;
     private Color color;
     
-    public Saab95(int nrDoors, double enginePower, double currentSpeed, Color color, String modelName){
+    public Saab95(){
         this.nrDoors = 2;
-        this.color = color; //
+        this.color = Color.red;
         this.enginePower = 125;
-	    this.turboOn = false; //Turbo off by default.
+	    this.turboOn = false;
         this.modelName = "Saab95";
         stopEngine();
-    }
-
-    public String getModelName(){
-        return modelName;
-    }
-    
-    public int getNrDoors(){
-        return nrDoors;
-    }
-    public double getEnginePower(){
-        return enginePower;
-    }
-
-    public double getCurrentSpeed(){
-        return currentSpeed;
-    }
-
-    public Color getColor(){
-        return color;
-    }
-
-    public void setColor(Color clr){
-	    color = clr;
-    }
-
-    public void startEngine(){
-	    currentSpeed = 0.1;
-    }
-
-    public void stopEngine(){
-	    currentSpeed = 0;
     }
 
     public void setTurboOn(){
