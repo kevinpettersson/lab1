@@ -4,10 +4,16 @@ public abstract class Car implements Movable {
 
     final int nrDoors;              //Number of door will never change for a specific car
     final double enginePower;       //Engine power is a set number
-    double currentSpeed;            //Speed is a variable that can change over time
-    Color color;                    //Color can change as well
-    final String modelName;         //A Volvo240 will always be a Volvo240
-    int[] position;                 //The current position of the car
+    //Speed is a variable that can change over time
+    double currentSpeed;
+    //Color can change as well
+    Color color;
+
+    //A Volvo240 will always be a Volvo240
+    final String modelName;
+
+    //The current position of the car, could be double[] for more precise location.
+    float[] position;
     int heading;
 
     public Car (int nrDoors, double enginePower, Color color, String modelName) {
@@ -17,23 +23,23 @@ public abstract class Car implements Movable {
         this.currentSpeed = currentSpeed;
         this.color = color;
         this.modelName = modelName;
-        this.position = new int[]{0,0};
+        this.position = new float[]{0,0};
         this.heading = 90;                 //Unit circle "north"
     }
 
 
 
     public void turnLeft(int degree) {
-        this.heading =  Math.abs((heading - degree)% 360);
+        this.heading =  Math.abs((heading + degree)% 360);
     }
 
     public void turnRight(int degree) {
-        this.heading = Math.abs((heading + degree)% 360);
+        this.heading = Math.abs((heading - degree)% 360);
     }
 
    public void move() {
-       this.position[0] = (int) (this.position[0] + Math.cos(Math.toRadians(heading))*currentSpeed);
-       this.position[1] = (int) (this.position[1] + Math.sin(Math.toRadians(heading))*currentSpeed);
+       this.position[0] = (float) (this.position[0] + Math.cos(Math.toRadians(heading))*currentSpeed);
+       this.position[1] = (float) (this.position[1] + Math.sin(Math.toRadians(heading))*currentSpeed);
    }
 
     public String getModelName(){
