@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public class Saab95 implements Car{
+public class Saab95 implements Car {
 
     private final int nrDoors;
     private final String modelName;
