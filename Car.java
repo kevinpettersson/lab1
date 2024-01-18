@@ -1,5 +1,6 @@
 import java.awt.*;
-public class Car {
+import java.lang.Math;
+public abstract class Car {
 
     final int nrDoors;
     final double enginePower;
@@ -39,19 +40,28 @@ public class Car {
         color = clr;
     }
 
-    public void startEngine();
+    public void startEngine() {
+        currentSpeed = 0;
+    }
 
-    public void stopEngine();
+    public void stopEngine() {
+        currentSpeed = 0.1;
+    }
 
-    public double speedFactor();
+    public abstract double speedFactor();
 
-    public void incrementSpeed(double amount);
+    public abstract void incrementSpeed(double amount);
 
-    public void decrementSpeed(double amount);
+    public abstract void decrementSpeed(double amount);
 
-    // TODO fix this method according to lab pm
-    public void gas(double amount);
-
-    // TODO fix this method according to lab pm
-    public void brake(double amount);
+    public void gas(double amount) {
+        if ((currentSpeed += amount) < enginePower) {
+            currentSpeed += amount;
+        }
+    }
+    public void brake(double amount) {
+        if ((currentSpeed -= amount) > enginePower) {
+            currentSpeed -= amount;
+        }
+    }
 }

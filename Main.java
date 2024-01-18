@@ -9,5 +9,7 @@ public class Main {
         System.out.println(saab.getCurrentSpeed());
         System.out.println(saab.getNrDoors());
         System.out.println(saab.getColor());
+
+        System.out.print(saab.color);
     }
 }
