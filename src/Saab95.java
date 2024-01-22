@@ -1,12 +1,12 @@
+
 import java.awt.*;
 
 public class Saab95 extends Car{
 
     private boolean turboOn;
-
     
     public Saab95(){
-        super(2,125,Color.red,"Saab95");
+        super(2,125,Color.red,"src.Saab95");
 	    this.turboOn = false;
         stopEngine();
     }
@@ -26,10 +26,10 @@ public class Saab95 extends Car{
     }
 
     public void incrementSpeed(double amount){
-        currentSpeed = getCurrentSpeed() + speedFactor() * amount;
+        currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, enginePower);
     }
 
     public void decrementSpeed(double amount){
-        currentSpeed = getCurrentSpeed() - speedFactor() * amount;
+        currentSpeed = Math.max(0, getCurrentSpeed() - speedFactor() * amount);
     }
 }
