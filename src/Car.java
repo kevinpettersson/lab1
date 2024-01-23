@@ -5,13 +5,13 @@ public abstract class Car implements Movable {
 
     final int nrDoors;              //Number of door will never change for a specific car
     final double enginePower;       //Engine power is a set number
-    double currentSpeed;            //Speed is a variable that can change over time
+    double currentSpeed;            //Speed can change over time
     Color color;                    //Color can change as well
-    final String modelName;         //A src.Volvo240 will always be a src.Volvo240
-    //int[] position;                 //The current position of the car
-    int heading;
-    Direction direction;
-    Point position;
+    final String modelName;         //Volvo240 will always be a Volvo240
+    Direction direction;            //Direction the car is facing will change over time.
+    Point position;                 //Position will change over time.
+    //int[] position;               //The current position of the car
+    //int heading;
 
     public Car (int nrDoors, double enginePower, Color color, String modelName) {
 
@@ -19,10 +19,10 @@ public abstract class Car implements Movable {
         this.enginePower = enginePower;
         this.color = color;
         this.modelName = modelName;
+        this.direction = Direction.NORTH;     //Cars initially facing "north"
+        this.position = new Point(0,0); //Cars initially starts at "origo"
         //this.position = new int[]{0,0};
-        this.position = new Point(0,0);
-        this.heading = 90;                 //Unit circle "north"
-        this.direction = Direction.NORTH; //Cars initially facing "north"
+        //this.heading = 90;                  //Unit circle "north"
     }
     public void move(){
         switch (direction) {

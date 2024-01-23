@@ -17,9 +17,6 @@ public class Point {
 
     @Override
     public String toString() {
-        return "src.Point{" +
-                "x=" + x +
-                ", y=" + y +
-                '}';
+        return "src.Point{" + "x=" + x + ", y=" + y + '}';
     }
 }

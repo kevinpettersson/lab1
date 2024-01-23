@@ -1,6 +1,4 @@
 
-import java.lang.Math;
-
 public interface Movable {
 
     public void move();

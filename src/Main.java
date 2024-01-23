@@ -1,3 +1,4 @@
+import java.awt.*;
 
 public class Main {
 
@@ -10,6 +11,10 @@ public class Main {
         saab.turnLeft();
         saab.move();
         System.out.println(saab.position);
+
+        Scania scania = new Scania();
+        System.out.println(scania.modelName);
+        System.out.println();
 
 
 
