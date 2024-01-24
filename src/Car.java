@@ -3,7 +3,7 @@ import java.awt.*;
 
 public abstract class Car implements Movable {
 
-    final int nrDoors;              //Number of door will never change for a specific car
+    private final int nrDoors;              //Number of door will never change for a specific car
     final double enginePower;       //Engine power is a set number
     double currentSpeed;            //Speed can change over time
     Color color;                    //Color can change as well

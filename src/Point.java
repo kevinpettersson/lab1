@@ -6,6 +6,10 @@ public class Point {
         this.x = x;
         this.y = y;
     }
+    public void setPos(double nx, double ny) {
+        this.x = nx;
+        this.y = ny;
+    }
 
     public double getX() {
         return x;
