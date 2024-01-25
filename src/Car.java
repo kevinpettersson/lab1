@@ -3,8 +3,8 @@ import java.awt.*;
 
 public abstract class Car implements Movable {
 
-    private final int nrDoors;              //Number of door will never change for a specific car
-    final double enginePower;       //Engine power is a set number
+    private final int nrDoors;      //Number of door will never change for a specific car
+    protected final double enginePower;       //Engine power is a set number
     double currentSpeed;            //Speed can change over time
     Color color;                    //Color can change as well
     final String modelName;         //Volvo240 will always be a Volvo240
@@ -90,40 +90,44 @@ public abstract class Car implements Movable {
      */
 
     public String getModelName(){
-        return modelName;
+        return this.modelName;
     }
     public int getNrDoors(){
-        return nrDoors;
+        return this.nrDoors;
     }
     public double getEnginePower(){
-        return enginePower;
+        return this.enginePower;
     }
 
     public double getCurrentSpeed(){
-        return currentSpeed;
+        return this.currentSpeed;
     }
 
     public Color getColor(){
-        return color;
+        return this.color;
     }
 
     public void setColor(Color clr) {
-        color = clr;
+        this.color = clr;
     }
 
     public void startEngine() {
-        currentSpeed = 0;
+        this.currentSpeed = 0;
     }
 
     public void stopEngine() {
-        currentSpeed = 0.1;
+        this.currentSpeed = 0.1;
     }
 
     public abstract double speedFactor();
 
-    public abstract void incrementSpeed(double amount);
+    public void incrementSpeed(double amount){
+        currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, enginePower);
+    }
 
-    public abstract void decrementSpeed(double amount);
+    public void decrementSpeed(double amount){
+        currentSpeed = Math.max(0, getCurrentSpeed() - speedFactor() * amount);
+    }
 
     public void gas(double amount) {
         if (amount > 0 && amount <= 1) {

@@ -1,6 +1,8 @@
 
 import org.junit.jupiter.api.Test;
 
+import java.awt.image.ConvolveOp;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class CarTest {
@@ -8,9 +10,10 @@ class CarTest {
     @Test
     void move() {
         Saab95 saab = new Saab95();
+        saab.currentSpeed = 1;
         saab.move();
         assertEquals(saab.position.x, 0);
-        assertNotEquals(saab.position.y, 0);
+        assertEquals(saab.position.y, 1);
     }
 
     @Test
@@ -62,6 +65,14 @@ class CarTest {
 
     @Test
     void speedFactor() {
+        Saab95 solvo = new Saab95();
+        solvo.setTurboOff();
+        double first = solvo.speedFactor();
+        solvo.setTurboOn();
+        assertTrue(first < solvo.speedFactor());
+
+        Volvo240 volvo = new Volvo240();
+        assertTrue(volvo.speedFactor() < solvo.speedFactor());
     }
 
     @Test
@@ -78,6 +89,10 @@ class CarTest {
         double current = saab.currentSpeed;
         saab.gas(0.5);
         assertTrue(current < saab.currentSpeed);
+        double neW = saab.currentSpeed;
+        saab.gas(0.1);
+        assertTrue(saab.currentSpeed > neW);
+
     }
 
     @Test
