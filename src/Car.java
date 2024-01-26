@@ -4,12 +4,12 @@ import java.awt.*;
 public abstract class Car implements Movable {
 
     private final int nrDoors;      //Number of door will never change for a specific car
-    protected final double enginePower;       //Engine power is a set number
-    double currentSpeed;            //Speed can change over time
-    Color color;                    //Color can change as well
-    final String modelName;         //Volvo240 will always be a Volvo240
-    Direction direction;            //Direction the car is facing will change over time.
-    Point position;                 //Position will change over time.
+    private final double enginePower;       //Engine power is a set number
+    protected double currentSpeed;            //Speed can change over time
+    protected Color color;                    //Color can change as well
+    private final String modelName;         //Volvo240 will always be a Volvo240
+    protected Direction direction;            //Direction the car is facing will change over time.
+    protected Point position;                 //Position will change over time.
     //int[] position;               //The current position of the car
     //int heading;
 

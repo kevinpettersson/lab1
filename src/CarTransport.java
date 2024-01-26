@@ -5,13 +5,48 @@ import java.util.Stack;
 public class CarTransport extends Truck{
 
     boolean truckBedOpen;
-    private Stack<Car> truckLoad;
+    protected Stack<Car> truckLoad;
 
     public CarTransport(){
         super(2,200, Color.BLUE,"CarTransport");
         this.truckBedOpen = false;
         this.truckLoad = new Stack<>();
         stopEngine();
+    }
+    @Override
+    public void move(){
+
+        switch (direction) {
+            case NORTH:
+                this.position.y += currentSpeed;
+                truckLoadPos(truckLoad);
+                break;
+            case WEST:
+                this.position.x -= currentSpeed;
+                truckLoadPos(truckLoad);
+                break;
+            case SOUTH:
+                this.position.y -= currentSpeed;
+                truckLoadPos(truckLoad);
+                break;
+            case EAST:
+                this.position.x += currentSpeed;
+                truckLoadPos(truckLoad);
+                break;
+        }
+    }
+    public void truckLoadPos(Stack<Car> truckload) {
+        ArrayList<Car> tmp = new ArrayList<>();
+
+        for (int i = 0; i < truckLoad.size(); i++) {
+            tmp.add(truckLoad.pop());
+        }
+        for (Car car : tmp) {
+            car.position = this.position;
+        }
+        for (Car car : tmp) {
+            truckload.push(car);
+        }
     }
     public void loadTruck(Car car){
         double truckX = this.position.x;
@@ -21,7 +56,7 @@ public class CarTransport extends Truck{
 
         if (!(car instanceof Truck)) {
             if(truckLoad.size() < 10 && truckBedOpen){
-                if (carX >= truckX -1 || carX <= truckX +1 && carY >= truckY -1 || carY <= truckY +1) {
+                if (carX >= truckX -1 || carX <= truckX + 1 && carY >= truckY -1 || carY <= truckY +1) {
                     truckLoad.push(car);
                 }
             }
@@ -46,7 +81,9 @@ public class CarTransport extends Truck{
 
     }
     void riseTruckBed(){
-        this.truckBedOpen = false;
+        if (currentSpeed == 0) {
+            this.truckBedOpen = false;
+        }
     }
 
     @Override

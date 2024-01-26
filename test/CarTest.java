@@ -86,12 +86,12 @@ class CarTest {
     @Test
     void gas() {
         Saab95 saab = new Saab95();
-        double current = saab.currentSpeed;
+        double current = saab.getCurrentSpeed();
         saab.gas(0.5);
-        assertTrue(current < saab.currentSpeed);
-        double neW = saab.currentSpeed;
+        assertTrue(current < saab.getEnginePower());
+        double neW = saab.getCurrentSpeed();
         saab.gas(0.1);
-        assertTrue(saab.currentSpeed > neW);
+        assertTrue(saab.getEnginePower() > neW);
 
     }
 
@@ -99,8 +99,8 @@ class CarTest {
     void brake() {
         Saab95 saab = new Saab95();
         saab.currentSpeed = 0.5;
-        double before = saab.currentSpeed;
+        double before = saab.getCurrentSpeed();
         saab.brake(0.2);
-        assertTrue(before > saab.currentSpeed);
+        assertTrue(before > saab.getCurrentSpeed());
     }
 }
