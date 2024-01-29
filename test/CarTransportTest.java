@@ -10,7 +10,7 @@ class CarTransportTest {
         CarTransport truck = new CarTransport();
         truck.loadTruck(saab);
         truck.move();
-        assertEquals(truck.truckLoad.peek().position, truck.position);
+        assertEquals(truck.truckLoad.peek().position.getX(), truck.position.getY());
     }
 
     @Test

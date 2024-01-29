@@ -3,14 +3,14 @@ import java.awt.*;
 
 public abstract class Car implements Movable {
 
-    private final int nrDoors;      //Number of door will never change for a specific car
+    private final int nrDoors;              //Number of door will never change for a specific car
     private final double enginePower;       //Engine power is a set number
-    protected double currentSpeed;            //Speed can change over time
-    protected Color color;                    //Color can change as well
+    protected double currentSpeed;          //Speed can change over time
+    private Color color;                    //Color can change as well
     private final String modelName;         //Volvo240 will always be a Volvo240
-    protected Direction direction;            //Direction the car is facing will change over time.
-    protected Point position;                 //Position will change over time.
-    //int[] position;               //The current position of the car
+    private Direction direction;            //Direction the car is facing will change over time.
+    protected Point position;               //Position will change over time.
+    //int[] position;                       //The current position of the car
     //int heading;
 
     public Car (int nrDoors, double enginePower, Color color, String modelName) {
@@ -24,6 +24,8 @@ public abstract class Car implements Movable {
         //this.position = new int[]{0,0};
         //this.heading = 90;                  //Unit circle "north"
     }
+
+    // ---- MOVE ---- \\
     public void move(){
         switch (direction) {
             case NORTH:
@@ -73,22 +75,10 @@ public abstract class Car implements Movable {
         }
     }
 
-    /*
-
-    public void turnLeft(int degree) {
-        this.heading =  Math.abs((heading - degree)% 360);
+    // ---- GETTERS ---- \\
+    public Direction getDirection() {
+        return this.direction;
     }
-
-    public void turnRight(int degree) {
-        this.heading = Math.abs((heading + degree)% 360);
-    }
-
-   public void move() {
-       this.position[0] = (int) (this.position[0] + Math.cos(Math.toRadians(heading))*currentSpeed);
-       this.position[1] = (int) (this.position[1] + Math.sin(Math.toRadians(heading))*currentSpeed);
-   }
-     */
-
     public String getModelName(){
         return this.modelName;
     }
@@ -98,27 +88,25 @@ public abstract class Car implements Movable {
     public double getEnginePower(){
         return this.enginePower;
     }
-
     public double getCurrentSpeed(){
         return this.currentSpeed;
     }
-
     public Color getColor(){
         return this.color;
     }
 
+    // ---- SETTERS ---- \\
     public void setColor(Color clr) {
         this.color = clr;
     }
-
     public void startEngine() {
         this.currentSpeed = 0;
     }
-
     public void stopEngine() {
         this.currentSpeed = 0.1;
     }
 
+    // ---- SPEED STUFF ---- \\
     public abstract double speedFactor();
 
     public void incrementSpeed(double amount){
@@ -145,3 +133,19 @@ public abstract class Car implements Movable {
         }
     }
 }
+
+    /*
+
+    public void turnLeft(int degree) {
+        this.heading =  Math.abs((heading - degree)% 360);
+    }
+
+    public void turnRight(int degree) {
+        this.heading = Math.abs((heading + degree)% 360);
+    }
+
+   public void move() {
+       this.position[0] = (int) (this.position[0] + Math.cos(Math.toRadians(heading))*currentSpeed);
+       this.position[1] = (int) (this.position[1] + Math.sin(Math.toRadians(heading))*currentSpeed);
+   }
+     */

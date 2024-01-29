@@ -1,8 +1,8 @@
 import java.awt.*;
 
-public class Scania extends Truck  {
+public class Scania extends Car  {
 
-    int truckBedAngle;
+    private int truckBedAngle;
 
     public Scania() {
         super(2, 200,Color.BLUE, "Scania");
@@ -10,6 +10,35 @@ public class Scania extends Truck  {
         stopEngine();
     }
 
+    public void setTruckBedAngle(int degree) {
+        if (degree >= 0) {
+            this.truckBedAngle += degree;
+        }
+    }
+    public int getTruckBedAngle(){
+        return this.truckBedAngle;
+    }
+    public void riseTruckbed (int degree) {
+        if (getCurrentSpeed() == 0) {
+            if (getTruckBedAngle() + degree <= 70) {
+                setTruckBedAngle(degree);
+            }
+            else {
+                setTruckBedAngle(70);
+            }
+        }
+    }
+
+    public void lowerTruckbed (int degree) {
+        if (getCurrentSpeed() == 0) {
+            if (getTruckBedAngle() - degree >= 0) {
+                setTruckBedAngle(-degree);
+            }
+            else {
+                setTruckBedAngle(0);
+            }
+        }
+    }
 
     @Override
     public double speedFactor() {
@@ -23,10 +52,12 @@ public class Scania extends Truck  {
         }
 
     }
-
     @Override
     public void decrementSpeed(double amount) {
-        currentSpeed = Math.max(0, getCurrentSpeed() - speedFactor() * amount);
+        if(getTruckBedAngle() == 0) {
+            this.currentSpeed = Math.max(0, getCurrentSpeed() - speedFactor() * amount);
+        }
+
     }
 }
 

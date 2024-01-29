@@ -12,8 +12,8 @@ class CarTest {
         Saab95 saab = new Saab95();
         saab.currentSpeed = 1;
         saab.move();
-        assertEquals(saab.position.x, 0);
-        assertEquals(saab.position.y, 1);
+        assertEquals(saab.position.getX(), 0);
+        assertEquals(saab.position.getY(), 1);
     }
 
     @Test
@@ -21,14 +21,18 @@ class CarTest {
 
         Saab95 saab = new Saab95();
         saab.turnLeft();
-        assertEquals(saab.direction, Direction.WEST);
+        assertEquals(saab.getDirection(), Direction.WEST);
     }
 
     @Test
     void turnRight() {
         Saab95 saab = new Saab95();
         saab.turnRight();
-        assertEquals(saab.direction, Direction.EAST);
+        assertEquals(saab.getDirection(), Direction.EAST);
+        saab.turnRight();
+        assertEquals(saab.getDirection(), Direction.SOUTH);
+        saab.turnRight();
+        assertEquals(saab.getDirection(), Direction.WEST);
     }
 
     @Test
