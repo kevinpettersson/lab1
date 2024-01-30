@@ -4,9 +4,9 @@ import java.util.Stack;
 
 public class CarTransport extends Car{
 
-    boolean truckBedOpen;
-    protected Stack<Car> truckLoad;
-    private int MAX_TRUCK_LOAD_CAPACITY = 10;
+    boolean truckBedOpen;                       //Boolean representing wether the truck bed door is open or closed.
+    protected Stack<Car> truckLoad;             //Represents the truckload as a stack.
+    private int MAX_TRUCK_LOAD_CAPACITY = 10;   //Threshold for how many cars the truckload can hold.
 
     public CarTransport(){
         super(2,200, Color.BLUE,"CarTransport");
@@ -16,7 +16,6 @@ public class CarTransport extends Car{
     }
     @Override
     public void move(){
-
         switch (getDirection()) {
             case NORTH:
                 this.position.y += currentSpeed;
@@ -36,11 +35,13 @@ public class CarTransport extends Car{
     public void truckLoadPos() {
         Stack<Car> tmp = new Stack<>();
 
+        //Set the position of each element in the stack equal to trucks position.
         while (!truckLoad.isEmpty()) {
             Car car = truckLoad.pop();
             car.position.setPos(this.position.getX(), this.position.getY());
             tmp.push(car);
         }
+        //Pushes each element back to the original stack.
         while (!tmp.isEmpty()) {
             truckLoad.push(tmp.pop());
         }
@@ -52,20 +53,26 @@ public class CarTransport extends Car{
         double carPositionX = car.position.getX();
         double carPositionY = car.position.getY();
 
-        if ((car.getEnginePower() == 125)) {   //
-            if(truckLoad.size() < MAX_TRUCK_LOAD_CAPACITY && truckBedOpen){
-                if ((carPositionX >= truckPositionX - 1 || carPositionX <= truckPositionX + 1)
-                        && (carPositionY >= truckPositionY -1 || carPositionY <= truckPositionY +1)){
+        //Checks so vehicle type is not truck.
+        if (!(car.getVehicleType() == VehicleType.TRUCK)) {
+
+            //Checks so the truckload is less than max capacity and that the door is open.
+            if((truckLoad.size() < MAX_TRUCK_LOAD_CAPACITY) && truckBedOpen){
+
+                //Checks so the position of the car and the truck is within range of each other.
+                if ((carPositionX >= truckPositionX - 1 && carPositionX <= truckPositionX + 1)
+                        && (carPositionY >= truckPositionY -1 && carPositionY <= truckPositionY +1)){
                     truckLoad.push(car);
                 }
             }
         }
     }
 
-    public void unloadTruck (Car car) {
+    public void unloadTruck() {
         double truckX = this.position.x;
         double truckY = this.position.y;
 
+        //Pops the stack and place the load close to the truck.
         if (truckBedOpen) {
             while(!truckLoad.isEmpty()){
                 truckLoad.pop().position.setPos(truckX+1, truckY+1);
@@ -85,18 +92,4 @@ public class CarTransport extends Car{
         }
     }
 
-    @Override
-    public double speedFactor() {
-        return 0;
-    }
-
-    @Override
-    public void incrementSpeed(double amount) {
-
-    }
-
-    @Override
-    public void decrementSpeed(double amount) {
-
-    }
 }

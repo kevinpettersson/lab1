@@ -10,19 +10,18 @@ public abstract class Car implements Movable {
     private final String modelName;         //Volvo240 will always be a Volvo240
     private Direction direction;            //Direction the car is facing will change over time.
     protected Point position;               //Position will change over time.
-    //int[] position;                       //The current position of the car
-    //int heading;
+    private final VehicleType type;         //Defines the Vehicle type.
 
-    public Car (int nrDoors, double enginePower, Color color, String modelName) {
+    public Car (int nrDoors, double enginePower, Color color, String modelName, VehicleType type) {
 
         this.nrDoors = nrDoors;
         this.enginePower = enginePower;
         this.color = color;
         this.modelName = modelName;
         this.direction = Direction.NORTH;     //Cars initially facing "north"
-        this.position = new Point(0,0); //Cars initially starts at "origo"
-        //this.position = new int[]{0,0};
-        //this.heading = 90;                  //Unit circle "north"
+        this.position = new Point(0,0); //Cars initially starts at "Origo"
+        this.type = type;
+
     }
 
     // ---- MOVE ---- \\
@@ -76,9 +75,10 @@ public abstract class Car implements Movable {
     }
 
     // ---- GETTERS ---- \\
-    public Direction getDirection() {
-        return this.direction;
+    public VehicleType getVehicleType(){
+        return this.type;
     }
+    public Direction getDirection() { return this.direction; }
     public String getModelName(){
         return this.modelName;
     }
@@ -96,18 +96,12 @@ public abstract class Car implements Movable {
     }
 
     // ---- SETTERS ---- \\
-    public void setColor(Color clr) {
-        this.color = clr;
-    }
-    public void startEngine() {
-        this.currentSpeed = 0;
-    }
-    public void stopEngine() {
-        this.currentSpeed = 0.1;
-    }
+    public void setColor(Color clr) { this.color = clr; }
+    public void startEngine() { this.currentSpeed = 0; }
+    public void stopEngine() { this.currentSpeed = 0.1; }
 
     // ---- SPEED STUFF ---- \\
-    public abstract double speedFactor();
+    public double speedFactor() { return getEnginePower() * 0.01; }
 
     public void incrementSpeed(double amount){
         currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, enginePower);
@@ -123,7 +117,6 @@ public abstract class Car implements Movable {
         } else {
             throw new IllegalArgumentException("Too much gas");
         }
-
     }
     public void brake(double amount) {
         if (amount > 0 && amount <= 1) {

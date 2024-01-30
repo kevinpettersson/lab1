@@ -5,12 +5,21 @@ import static org.junit.jupiter.api.Assertions.*;
 class CarTransportTest {
 
     @Test
-    void move() {
+    void TestTruckLoadPositionChangeAfterMoveCall() {
         Saab95 saab = new Saab95();
         CarTransport truck = new CarTransport();
+
+        truck.currentSpeed = 0;
+        truck.lowerTruckBed();
         truck.loadTruck(saab);
+        truck.currentSpeed = 1;
         truck.move();
-        assertEquals(truck.truckLoad.peek().position.getX(), truck.position.getY());
+
+        Point carPos = truck.truckLoad.peek().position;
+        Point truckPos = truck.position;
+
+        assertEquals(truckPos.getY(), carPos.getY());
+        assertEquals(truckPos.getX(), carPos.getX());
     }
 
     @Test
