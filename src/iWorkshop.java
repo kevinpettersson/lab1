@@ -1,8 +1,8 @@
 public interface iWorkshop {
 
-    public void pickupVehicle(Car car);
+    public void pickupVehicle();
 
-    public void leaveVehicle();
+    public int leaveVehicle();
 
     //public String[] viewHistory();
 }
