@@ -31,7 +31,7 @@ public abstract class Workshop<T extends Car> implements iWorkshop {
                 car.position.x = this.location.x + 1;
                 car.position.y = this.location.y + 1;
                 this.completedWork.add(car.getModelName());
-                break;
+                return;
             }
         }
     }
@@ -42,10 +42,12 @@ public abstract class Workshop<T extends Car> implements iWorkshop {
         if (!(getCurrentLoad() >= getCapacity())){
             for (int i = 0; i < getAcceptableModels().length; i++) {
 
-                //Checks so the car is an instance of acceptable models.
+                //Checks so the car is an instance of acceptable models, then adds the car to the workshop's current load and moves the vehicle inside
                 if (acceptableModels[i].equals(car.getModelName())) {
                     this.currentLoad.add(car);
-                    break;
+                    car.position.x = this.location.x;
+                    car.position.y = this.location.y;
+                    return;
                 }
             }
         }
