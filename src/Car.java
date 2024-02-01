@@ -41,7 +41,7 @@ public abstract class Car implements Movable {
                 break;
         }
     }
-    public void turnLeft() {
+    public void turnLeft(){
         switch (direction) {
             case NORTH:
                 direction = Direction.WEST;
@@ -126,19 +126,3 @@ public abstract class Car implements Movable {
         }
     }
 }
-
-    /*
-
-    public void turnLeft(int degree) {
-        this.heading =  Math.abs((heading - degree)% 360);
-    }
-
-    public void turnRight(int degree) {
-        this.heading = Math.abs((heading + degree)% 360);
-    }
-
-   public void move() {
-       this.position[0] = (int) (this.position[0] + Math.cos(Math.toRadians(heading))*currentSpeed);
-       this.position[1] = (int) (this.position[1] + Math.sin(Math.toRadians(heading))*currentSpeed);
-   }
-     */
