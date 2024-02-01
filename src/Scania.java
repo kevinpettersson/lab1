@@ -5,7 +5,7 @@ public class Scania extends Car  {
     private int truckBedAngle;
 
     public Scania() {
-        super(2, 200,Color.BLUE, "Scania");
+        super(2, 200,Color.BLUE, "Scania", VehicleType.TRUCK);
         this.truckBedAngle = 0;
         stopEngine();
     }
@@ -42,13 +42,13 @@ public class Scania extends Car  {
 
     @Override
     public double speedFactor() {
-        return enginePower * 0.01;
+        return getEnginePower() * 0.01;
     }
 
     @Override
     public void incrementSpeed(double amount) {
         if(truckBedAngle == 0){
-            currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, enginePower);
+            currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, getEnginePower());
         }
 
     }

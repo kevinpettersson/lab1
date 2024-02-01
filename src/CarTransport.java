@@ -9,7 +9,7 @@ public class CarTransport extends Car{
     private int MAX_TRUCK_LOAD_CAPACITY = 10;   //Threshold for how many cars the truckload can hold.
 
     public CarTransport(){
-        super(2,200, Color.BLUE,"CarTransport");
+        super(2,200, Color.BLUE,"CarTransport", VehicleType.TRUCK);
         this.truckBedOpen = false;
         this.truckLoad = new Stack<Car>();
         stopEngine();
