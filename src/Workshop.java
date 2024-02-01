@@ -37,6 +37,16 @@ public abstract class Workshop<T extends Car> implements iWorkshop {
     }
 
     public void leaveVehicle(Car car){
+        //First we confirm that the vehicle in question is accepted at the workshop.
+        int hit = 0;
+        for (int i = 0; i < getAcceptableModels().length; i++) {
+            if (acceptableModels[i] == car.getModelName()) {
+                hit += 1;
+            }
+        }
+        if (hit == 0){
+            throw new IllegalArgumentException("Can't leave this vehicle here, it's not an acceptable vehicle");
+        }
 
         //Checks so we won't go over max capacity.
         if (!(getCurrentLoad() >= getCapacity())){
@@ -61,11 +71,7 @@ public abstract class Workshop<T extends Car> implements iWorkshop {
     public int getCapacity(){
         return this.capacity;
     }
-
     public int getCurrentLoad(){
         return this.currentLoad.size();
     }
-
-
 }
-
