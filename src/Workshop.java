@@ -12,7 +12,7 @@ public class Workshop <T extends Car> {
     Workshop(int capacity, Point location){
          this.capacity = capacity;                  // Total amount of cars the workshop can handle.
          this.completedWork = new ArrayList<>();    // A list to store models we've completed
-         this.currentLoad = new ArrayList<>();   // The current cars handled by the workshop.
+         this.currentLoad = new ArrayList<>();      // The current cars handled by the workshop.
          this.location = location;                  // The user defines unique location when creating new object.
 
     }
