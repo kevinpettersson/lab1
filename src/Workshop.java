@@ -16,20 +16,19 @@ public class Workshop <T extends Car> {
          this.location = location;                  // The user defines unique location when creating new object.
 
     }
-    public T pickupVehicle(T car) {
+    public void pickupVehicle(T car) {
 
         for (int i = 0; i < getCurrentLoad(); i++) {
 
             //Checks so it's the right car were picking up by comparing model-name.
             if (car.getModelName().equals(this.currentLoad.get(i).getModelName())) {
 
-                //Removes the car from workshop then places the car outside the workshop location.
+                //Removes the car from workshop then places the car outside the workshop location
                 this.currentLoad.remove(car);
                 car.position.x = this.location.x + 1;
                 car.position.y = this.location.y + 1;
-                getCompletedWork().add(car.getModelName());
-
-                return this.currentLoad.get(i);
+                completedWork.add(car.getModelName());
+                return; //this.currentLoad.get(i); FRÅGA KEVIN HUR FAN HAN TÄNKTE <3 (Med kärlek dock)
             }
         }
         throw new IllegalArgumentException("We dont have any car with given modelname");
@@ -39,6 +38,8 @@ public class Workshop <T extends Car> {
 
         if (currentLoad.size() < capacity) {
             currentLoad.add(car);
+            car.position.x = this.location.x;
+            car.position.y = this.location.y;
         } else {
             throw new IllegalArgumentException("Can't leave this vehicle here, workshop is full");
         }

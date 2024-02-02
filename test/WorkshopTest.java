@@ -1,5 +1,7 @@
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class WorkshopTest {
@@ -20,11 +22,22 @@ class WorkshopTest {
     void leaveVehicle() {
         Workshop<Car> carWorkshop = new Workshop<>(10, new Point(0,0));
         Saab95 saab = new Saab95();
+        carWorkshop.leaveVehicle(saab);
+        assertEquals(carWorkshop.getCurrentLoad(), 1);
 
     }
 
     @Test
     void getCompletedWork() {
+        ArrayList <String> str = new ArrayList<>();
+        str.add("Saab95");
+
+        Workshop<Car> carWorkshop = new Workshop<>(10, new Point(0,0));
+        Saab95 saab = new Saab95();
+        carWorkshop.leaveVehicle(saab);
+        carWorkshop.pickupVehicle(saab);
+        assertEquals(str, carWorkshop.getCompletedWork());
+
     }
 
     @Test
