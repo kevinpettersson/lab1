@@ -10,7 +10,7 @@ class CarTransportTest {
         CarTransport truck = new CarTransport();
 
         truck.currentSpeed = 0;
-        truck.lowerTruckBed();
+        truck.lowerTruckbed(70);
         truck.loadTruck(saab);
         truck.currentSpeed = 1;
         truck.move();
@@ -28,18 +28,48 @@ class CarTransportTest {
 
     @Test
     void loadTruck() {
+        CarTransport ct = new CarTransport();
+        ct.currentSpeed = 0;
+        ct.lowerTruckbed(70);
+        Saab95 saab = new Saab95();
+
+        ct.loadTruck(saab);
+
+        assertEquals(ct.truckLoad.peek(), saab);
+
     }
 
     @Test
     void unloadTruck() {
+        CarTransport ct = new CarTransport();
+        ct.currentSpeed = 0;
+        ct.lowerTruckbed(70);
+        Saab95 saab = new Saab95();
+
+        ct.loadTruck(saab);
+
+        ct.unloadTruck();
+
+
+        assertEquals(saab.position.x, 1);
+        assertEquals(saab.position.y, 1);
     }
 
     @Test
     void lowerTruckBed() {
+        CarTransport ct = new CarTransport();
+        ct.currentSpeed = 0;
+        ct.lowerTruckbed(4);
+        assertTrue(ct.getTruckBedAngle() == 70);
     }
 
     @Test
     void riseTruckBed() {
+        CarTransport ct = new CarTransport();
+        ct.currentSpeed = 0;
+        ct.lowerTruckbed(70);
+        ct.riseTruckbed(4);
+        assertTrue(ct.getTruckBedAngle() == 0);
     }
 
     @Test
@@ -48,9 +78,25 @@ class CarTransportTest {
 
     @Test
     void incrementSpeed() {
+        CarTransport ct = new CarTransport();
+        ct.currentSpeed = 0;
+        ct.lowerTruckbed(70);
+        double before = ct.getCurrentSpeed();
+        ct.incrementSpeed(2);
+        double after = ct.getCurrentSpeed();
+        assertEquals(before, after);
+
     }
 
     @Test
     void decrementSpeed() {
+        CarTransport ct = new CarTransport();
+        ct.currentSpeed = 0;
+        ct.lowerTruckbed(70);
+        ct.riseTruckbed(30);
+        double before = ct.getCurrentSpeed();
+        ct.incrementSpeed(2);
+        double after = ct.getCurrentSpeed();
+        assertTrue(before < after);
     }
 }

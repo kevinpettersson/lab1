@@ -1,16 +1,13 @@
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.Stack;
 
-public class CarTransport extends Car{
+public class CarTransport extends Truck{
 
-    boolean truckBedOpen;                       //Boolean representing wether the truck bed door is open or closed.
     protected Stack<Car> truckLoad;             //Represents the truckload as a stack.
     private int MAX_TRUCK_LOAD_CAPACITY = 10;   //Threshold for how many cars the truckload can hold.
 
     public CarTransport(){
-        super(2,200, Color.BLUE,"CarTransport", VehicleType.TRUCK);
-        this.truckBedOpen = false;
+        super(2,125, Color.BLUE,"CarTransport", VehicleType.TRUCK);
         this.truckLoad = new Stack<Car>();
         stopEngine();
     }
@@ -57,7 +54,7 @@ public class CarTransport extends Car{
         if (!(car.getVehicleType() == VehicleType.TRUCK)) {
 
             //Checks so the truckload is less than max capacity and that the door is open.
-            if((truckLoad.size() < MAX_TRUCK_LOAD_CAPACITY) && truckBedOpen){
+            if((truckLoad.size() < MAX_TRUCK_LOAD_CAPACITY) && getTruckBedAngle() == 70){
 
                 //Checks so the position of the car and the truck is within range of each other.
                 if ((carPositionX >= truckPositionX - 1 && carPositionX <= truckPositionX + 1)
@@ -73,22 +70,26 @@ public class CarTransport extends Car{
         double truckY = this.position.y;
 
         //Pops the stack and place the load close to the truck.
-        if (truckBedOpen) {
+        if (getTruckBedAngle() == 70) {
             while(!truckLoad.isEmpty()){
-                truckLoad.pop().position.setPos(truckX+1, truckY+1);
+                Car car = truckLoad.pop();
+                car.position.setPos(truckX+1, truckY+1);
+
             }
         }
     }
 
-    void lowerTruckBed(){
-        if (currentSpeed == 0) {
-            this.truckBedOpen = true;
+    @Override
+    public void lowerTruckbed(int degree){
+        if (getCurrentSpeed() == 0) {
+            this.truckBedAngle = 70;
         }
 
     }
-    void riseTruckBed(){
-        if (currentSpeed == 0) {
-            this.truckBedOpen = false;
+    @Override
+    public void riseTruckbed(int degree){
+        if (getCurrentSpeed() == 0) {
+            this.truckBedAngle = 0;
         }
     }
 
