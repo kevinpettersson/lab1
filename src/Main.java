@@ -12,7 +12,5 @@ public class Main {
 
         Scania scanish = new Scania();
         CarTransport ct = new CarTransport();
-
-        work.leaveVehicle(ct);
     }
 }

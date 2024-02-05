@@ -10,7 +10,7 @@ class CarTransportTest {
         CarTransport truck = new CarTransport();
 
         truck.currentSpeed = 0;
-        truck.lowerTruckbed(70);
+        truck.lowerTruckBed(70);
         truck.loadTruck(saab);
         truck.currentSpeed = 1;
         truck.move();
@@ -30,7 +30,7 @@ class CarTransportTest {
     void loadTruck() {
         CarTransport ct = new CarTransport();
         ct.currentSpeed = 0;
-        ct.lowerTruckbed(70);
+        ct.lowerTruckBed(70);
         Saab95 saab = new Saab95();
 
         ct.loadTruck(saab);
@@ -43,7 +43,7 @@ class CarTransportTest {
     void unloadTruck() {
         CarTransport ct = new CarTransport();
         ct.currentSpeed = 0;
-        ct.lowerTruckbed(70);
+        ct.lowerTruckBed(70);
         Saab95 saab = new Saab95();
 
         ct.loadTruck(saab);
@@ -59,7 +59,7 @@ class CarTransportTest {
     void lowerTruckBed() {
         CarTransport ct = new CarTransport();
         ct.currentSpeed = 0;
-        ct.lowerTruckbed(4);
+        ct.lowerTruckBed(70);
         assertTrue(ct.getTruckBedAngle() == 70);
     }
 
@@ -67,8 +67,8 @@ class CarTransportTest {
     void riseTruckBed() {
         CarTransport ct = new CarTransport();
         ct.currentSpeed = 0;
-        ct.lowerTruckbed(70);
-        ct.riseTruckbed(4);
+
+        ct.raiseTruckBed(86);
         assertTrue(ct.getTruckBedAngle() == 0);
     }
 
@@ -80,7 +80,7 @@ class CarTransportTest {
     void incrementSpeed() {
         CarTransport ct = new CarTransport();
         ct.currentSpeed = 0;
-        ct.lowerTruckbed(70);
+        ct.lowerTruckBed(70);
         double before = ct.getCurrentSpeed();
         ct.incrementSpeed(2);
         double after = ct.getCurrentSpeed();
@@ -92,8 +92,8 @@ class CarTransportTest {
     void decrementSpeed() {
         CarTransport ct = new CarTransport();
         ct.currentSpeed = 0;
-        ct.lowerTruckbed(70);
-        ct.riseTruckbed(30);
+        ct.lowerTruckBed(70);
+        ct.raiseTruckBed(30);
         double before = ct.getCurrentSpeed();
         ct.incrementSpeed(2);
         double after = ct.getCurrentSpeed();
