@@ -1,32 +1,21 @@
 import java.awt.*;
 import java.util.Stack;
 
-public class CarTransport extends Truck{
+public class CarTransport extends Car implements iTruckBed{
 
     protected Stack<Car> truckLoad;             //Represents the truckload as a stack.
     private int MAX_TRUCK_LOAD_CAPACITY = 10;   //Threshold for how many cars the truckload can hold.
+    private TruckBed tb;
 
     public CarTransport(){
         super(2,125, Color.BLUE,"CarTransport", VehicleType.TRUCK);
+        this.tb = new TruckBed();
         this.truckLoad = new Stack<Car>();
         stopEngine();
     }
     @Override
     public void move(){
-        switch (getDirection()) {
-            case NORTH:
-                this.position.y += currentSpeed;
-                break;
-            case WEST:
-                this.position.x -= currentSpeed;
-                break;
-            case SOUTH:
-                this.position.y -= currentSpeed;
-                break;
-            case EAST:
-                this.position.x += currentSpeed;
-                break;
-        }
+        super.move();
         truckLoadPos();
     }
     public void truckLoadPos() {
@@ -54,7 +43,7 @@ public class CarTransport extends Truck{
         if (!(car.getVehicleType() == VehicleType.TRUCK)) {
 
             //Checks so the truckload is less than max capacity and that the door is open.
-            if((truckLoad.size() < MAX_TRUCK_LOAD_CAPACITY) && getTruckBedAngle() == 70){
+            if((truckLoad.size() < MAX_TRUCK_LOAD_CAPACITY) && tb.getTruckBedAngle() == 70){
 
                 //Checks so the position of the car and the truck is within range of each other.
                 if ((carPositionX >= truckPositionX - 1 && carPositionX <= truckPositionX + 1)
@@ -70,7 +59,7 @@ public class CarTransport extends Truck{
         double truckY = this.position.y;
 
         //Pops the stack and place the load close to the truck.
-        if (getTruckBedAngle() == 70) {
+        if (tb.getTruckBedAngle() == 70) {
             while(!truckLoad.isEmpty()){
                 Car car = truckLoad.pop();
                 car.position.setPos(truckX+1, truckY+1);
@@ -79,18 +68,34 @@ public class CarTransport extends Truck{
         }
     }
 
+    public void setTruckBedAngle(int degree) {
+
+    }
+
+    public int getTruckBedAngle() {
+        return tb.truckBedAngle;
+    }
+
+    public void raiseTruckBed(int degree) {
+        tb.raiseTruckBed(70, this);
+    }
+
+    public void lowerTruckBed(int degree) {
+        tb.lowerTruckBed(70, this);
+    }
+
     @Override
-    public void lowerTruckbed(int degree){
-        if (getCurrentSpeed() == 0) {
-            this.truckBedAngle = 70;
+    public void incrementSpeed(double amount){
+        if (tb.getTruckBedAngle() == 0){
+            currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, getEnginePower());
         }
 
     }
+
     @Override
-    public void riseTruckbed(int degree){
-        if (getCurrentSpeed() == 0) {
-            this.truckBedAngle = 0;
+    public void decrementSpeed(double amount){
+        if (tb.getTruckBedAngle() == 0){
+            currentSpeed = Math.max(0, getCurrentSpeed() - speedFactor() * amount);
         }
     }
-
 }

@@ -8,13 +8,11 @@ public abstract class Truck extends Car {
         super(2, 125, Color.BLACK, "Truck", VehicleType.TRUCK);
         this.truckBedAngle = 0;
         stopEngine();
-
     }
 
     public int getTruckBedAngle(){
         return this.truckBedAngle;
     }
-
 
     @Override
     public double speedFactor() {
@@ -26,8 +24,8 @@ public abstract class Truck extends Car {
         if(getTruckBedAngle() == 0){
             this.currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, getEnginePower());
         }
-
     }
+
     @Override
     public void decrementSpeed(double amount) {
         if(getTruckBedAngle() == 0) {
