@@ -10,7 +10,7 @@ class CarTest {
     @Test
     void move() {
         Saab95 saab = new Saab95();
-        saab.currentSpeed = 1;
+        saab.transform.currentSpeed = 1;
         saab.move();
         assertEquals(saab.position.getX(), 0);
         assertEquals(saab.position.getY(), 1);
@@ -71,12 +71,12 @@ class CarTest {
     void speedFactor() {
         Saab95 solvo = new Saab95();
         solvo.setTurboOff();
-        double first = solvo.speedFactor();
+        double first = solvo.transform.speedFactor();
         solvo.setTurboOn();
-        assertTrue(first < solvo.speedFactor());
+        assertTrue(first < solvo.transform.speedFactor());
 
         Volvo240 volvo = new Volvo240();
-        assertTrue(volvo.speedFactor() < solvo.speedFactor());
+        assertTrue(volvo.transform.speedFactor() < solvo.transform.speedFactor());
     }
 
     @Test
@@ -90,21 +90,21 @@ class CarTest {
     @Test
     void gas() {
         Saab95 saab = new Saab95();
-        double current = saab.getCurrentSpeed();
-        saab.gas(0.5);
-        assertTrue(current < saab.getEnginePower());
-        double neW = saab.getCurrentSpeed();
-        saab.gas(0.1);
-        assertTrue(saab.getEnginePower() > neW);
+        double current = saab.transform.getCurrentSpeed();
+        saab.transform.gas(0.5);
+        assertTrue(current < saab.transform.getEnginepower());
+        double neW = saab.transform.getCurrentSpeed();
+        saab.transform.gas(0.1);
+        assertTrue(saab.transform.getEnginepower() > neW);
 
     }
 
     @Test
     void brake() {
         Saab95 saab = new Saab95();
-        saab.currentSpeed = 0.5;
-        double before = saab.getCurrentSpeed();
-        saab.brake(0.2);
-        assertTrue(before > saab.getCurrentSpeed());
+        saab.transform.currentSpeed = 0.5;
+        double before = saab.transform.getCurrentSpeed();
+        saab.transform.brake(0.2);
+        assertTrue(before > saab.transform.getCurrentSpeed());
     }
 }

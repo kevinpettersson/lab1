@@ -6,7 +6,7 @@ public class Scania extends Car implements iTruckBed  {
     public Scania() {
         super(2, 125, Color.BLACK, "Scania", VehicleType.TRUCK);
         this.tb = new TruckBed();
-        stopEngine();
+        transform.stopEngine();
     }
 
 
@@ -19,6 +19,7 @@ public class Scania extends Car implements iTruckBed  {
         return tb.truckBedAngle;
     }
     public void raiseTruckBed(int degree){
+
         tb.raiseTruckBed(degree, this);
     }
 
@@ -26,20 +27,6 @@ public class Scania extends Car implements iTruckBed  {
        tb.lowerTruckBed(degree, this);
     }
 
-    @Override
-    public void incrementSpeed(double amount){
-        if (tb.getTruckBedAngle() == 0){
-            currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, getEnginePower());
-        }
-
-    }
-
-    @Override
-    public void decrementSpeed(double amount){
-        if (tb.getTruckBedAngle() == 0){
-            currentSpeed = Math.max(0, getCurrentSpeed() - speedFactor() * amount);
-        }
-    }
 }
 
 

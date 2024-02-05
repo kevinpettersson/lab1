@@ -9,10 +9,10 @@ class CarTransportTest {
         Saab95 saab = new Saab95();
         CarTransport truck = new CarTransport();
 
-        truck.currentSpeed = 0;
+        truck.transform.currentSpeed = 0;
         truck.lowerTruckBed(70);
         truck.loadTruck(saab);
-        truck.currentSpeed = 1;
+        truck.transform.currentSpeed = 1;
         truck.move();
 
         Point carPos = truck.truckLoad.peek().position;
@@ -29,7 +29,7 @@ class CarTransportTest {
     @Test
     void loadTruck() {
         CarTransport ct = new CarTransport();
-        ct.currentSpeed = 0;
+        ct.transform.currentSpeed = 0;
         ct.lowerTruckBed(70);
         Saab95 saab = new Saab95();
 
@@ -42,7 +42,7 @@ class CarTransportTest {
     @Test
     void unloadTruck() {
         CarTransport ct = new CarTransport();
-        ct.currentSpeed = 0;
+        ct.transform.currentSpeed = 0;
         ct.lowerTruckBed(70);
         Saab95 saab = new Saab95();
 
@@ -58,7 +58,7 @@ class CarTransportTest {
     @Test
     void lowerTruckBed() {
         CarTransport ct = new CarTransport();
-        ct.currentSpeed = 0;
+        ct.transform.currentSpeed = 0;
         ct.lowerTruckBed(70);
         assertTrue(ct.getTruckBedAngle() == 70);
     }
@@ -66,7 +66,7 @@ class CarTransportTest {
     @Test
     void riseTruckBed() {
         CarTransport ct = new CarTransport();
-        ct.currentSpeed = 0;
+        ct.transform.currentSpeed = 0;
 
         ct.raiseTruckBed(86);
         assertTrue(ct.getTruckBedAngle() == 0);
@@ -79,11 +79,11 @@ class CarTransportTest {
     @Test
     void incrementSpeed() {
         CarTransport ct = new CarTransport();
-        ct.currentSpeed = 0;
+        ct.transform.currentSpeed = 0;
         ct.lowerTruckBed(70);
-        double before = ct.getCurrentSpeed();
-        ct.incrementSpeed(2);
-        double after = ct.getCurrentSpeed();
+        double before = ct.transform.getCurrentSpeed();
+        ct.transform.incrementSpeed(2);
+        double after = ct.transform.getCurrentSpeed();
         assertEquals(before, after);
 
     }
@@ -91,12 +91,12 @@ class CarTransportTest {
     @Test
     void decrementSpeed() {
         CarTransport ct = new CarTransport();
-        ct.currentSpeed = 0;
+        ct.transform.currentSpeed = 0;
         ct.lowerTruckBed(70);
         ct.raiseTruckBed(30);
-        double before = ct.getCurrentSpeed();
-        ct.incrementSpeed(2);
-        double after = ct.getCurrentSpeed();
+        double before = ct.transform.getCurrentSpeed();
+        ct.transform.incrementSpeed(2);
+        double after = ct.transform.getCurrentSpeed();
         assertTrue(before < after);
     }
 }

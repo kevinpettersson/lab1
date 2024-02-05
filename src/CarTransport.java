@@ -11,7 +11,7 @@ public class CarTransport extends Car implements iTruckBed{
         super(2,125, Color.BLUE,"CarTransport", VehicleType.TRUCK);
         this.tb = new TruckBed();
         this.truckLoad = new Stack<Car>();
-        stopEngine();
+        transform.stopEngine();
     }
     @Override
     public void move(){
@@ -77,25 +77,13 @@ public class CarTransport extends Car implements iTruckBed{
     }
 
     public void raiseTruckBed(int degree) {
+        transform.setCargoDoorClosed(true);
         tb.raiseTruckBed(70, this);
     }
 
     public void lowerTruckBed(int degree) {
+        transform.setCargoDoorClosed(false);
         tb.lowerTruckBed(70, this);
     }
 
-    @Override
-    public void incrementSpeed(double amount){
-        if (tb.getTruckBedAngle() == 0){
-            currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, getEnginePower());
-        }
-
-    }
-
-    @Override
-    public void decrementSpeed(double amount){
-        if (tb.getTruckBedAngle() == 0){
-            currentSpeed = Math.max(0, getCurrentSpeed() - speedFactor() * amount);
-        }
-    }
 }
