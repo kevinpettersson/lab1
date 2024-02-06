@@ -18,7 +18,7 @@ class PointTest {
         Saab95 saab = new Saab95();
         assertEquals(saab.position.getX(), 0);
         saab.turnRight();
-        saab.currentSpeed = 1;
+        saab.transform.currentSpeed = 1;
         saab.move();
         assertEquals(saab.position.getX(), 1);
 

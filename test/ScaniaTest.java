@@ -14,7 +14,7 @@ class ScaniaTest {
     @Test
     void raiseTruckbed() {
         Scania scania = new Scania();
-        scania.currentSpeed = 0;
+        scania.transform.currentSpeed = 0;
         scania.setTruckBedAngle(60);
         scania.raiseTruckBed(20);
         assertTrue(scania.getTruckBedAngle() == 40);
@@ -23,7 +23,7 @@ class ScaniaTest {
     @Test
     void lowerTruckbed() {
         Scania scania = new Scania();
-        scania.currentSpeed = 0;
+        scania.transform.currentSpeed = 0;
         scania.setTruckBedAngle(60);
         scania.lowerTruckBed(70);
         assertTrue(scania.getTruckBedAngle() == 70);
