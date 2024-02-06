@@ -6,6 +6,8 @@ public class Transform {
     double TrimFactor;
 
     public Transform(double enginepower){
+        /* Base values for all possible functions that might interfere with a speed calculation. So that every vehicle
+        can utilise Transform even though they have different factors. NOTE: Only Saab95 have the power to turn on Turbo (see Saab95.java) */
         this.enginepower = enginepower;
         this.currentSpeed = 0;
         this.TurboOn = false;
@@ -13,6 +15,8 @@ public class Transform {
         this.CargoDoorClosed = true;
     }
 
+    /* Redone to calculate the speed factor for any given vehicle, for those who don't utilise a (for example) truckbed.
+    So there is a base value that won't interfere unless the function in question is being used */
     public double speedFactor() {
         double Turbo = 1;
         if (TurboOn){
@@ -65,9 +69,6 @@ public class Transform {
     }
 
     //Setters
-    public void setTrimFactor(double value){
-        this.TrimFactor = value;
-    }
     public void setCargoDoorClosed(Boolean value){
         this.CargoDoorClosed = value;
     }
