@@ -1,4 +1,4 @@
-
+import lab1.*;
 import org.junit.jupiter.api.Test;
 
 import java.awt.image.ConvolveOp;
