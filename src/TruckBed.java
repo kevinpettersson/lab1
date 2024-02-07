@@ -1,5 +1,4 @@
 public class TruckBed {
-
     int truckBedAngle;
     TruckBed(){
         this.truckBedAngle = 0;
