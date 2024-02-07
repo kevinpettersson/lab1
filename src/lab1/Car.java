@@ -1,6 +1,6 @@
+package lab1;
 
 import java.awt.*;
-
 public abstract class Car implements Movable {
     private final int nrDoors;              //Number of door will never change for a specific car
     private Color color;                    //Color can change as well
