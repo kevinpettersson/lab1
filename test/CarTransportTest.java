@@ -1,5 +1,5 @@
 import org.junit.jupiter.api.Test;
-
+import lab1.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class CarTransportTest {
