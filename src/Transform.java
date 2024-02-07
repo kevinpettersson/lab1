@@ -1,4 +1,5 @@
 public class Transform {
+
     protected double currentSpeed;
     private final double enginepower;
     protected Boolean TurboOn;
@@ -46,8 +47,6 @@ public class Transform {
             throw new IllegalArgumentException("Too much brake");
         }
     }
-    public void startEngine() { this.currentSpeed = 0; }
-    public void stopEngine() { this.currentSpeed = 0; }
 
 
     // Getters
@@ -65,9 +64,12 @@ public class Transform {
     }
 
     //Setters
+    public void startEngine() { this.currentSpeed = 0; }
+    public void stopEngine() { this.currentSpeed = 0; }
     public void setTrimFactor(double value){
         this.TrimFactor = value;
     }
+
     public void setCargoDoorClosed(Boolean value){
         this.CargoDoorClosed = value;
     }

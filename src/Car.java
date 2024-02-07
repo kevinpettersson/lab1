@@ -86,10 +86,6 @@ public abstract class Car implements Movable {
     public Color getColor(){
         return this.color;
     }
-
     // ---- SETTERS ---- \\
     public void setColor(Color clr) { this.color = clr; }
-
-
-
 }
