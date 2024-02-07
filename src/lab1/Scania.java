@@ -1,6 +1,8 @@
+package lab1;
+
 import java.awt.*;
 
-public class Scania extends Car implements iTruckBed  {
+public class Scania extends Car implements iTruckBed {
 
     private TruckBed tb;
     public Scania() {

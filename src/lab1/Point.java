@@ -1,3 +1,4 @@
+package lab1;
 
 public class Point {
     protected double x;

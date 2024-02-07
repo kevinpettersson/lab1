@@ -1,7 +1,9 @@
+package lab1;
+
 import java.awt.*;
 import java.util.Stack;
 
-public class CarTransport extends Car implements iTruckBed{
+public class CarTransport extends Car implements iTruckBed {
 
     protected Stack<Car> truckLoad;             //Represents the truckload as a stack.
     private int MAX_TRUCK_LOAD_CAPACITY = 10;   //Threshold for how many cars the truckload can hold.

@@ -1,7 +1,8 @@
+package lab1;
 
 import java.awt.*;
 
-public class Volvo240 extends Car{
+public class Volvo240 extends Car {
 
     public Volvo240 (){
         super(4, 100, Color.red, "Volvo240", VehicleType.CAR);

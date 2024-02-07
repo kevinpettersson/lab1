@@ -1,3 +1,5 @@
+package lab1;
+
 public class Transform {
     protected double currentSpeed;
     private final double enginepower;
