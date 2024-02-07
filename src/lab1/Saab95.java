@@ -8,12 +8,17 @@ public class Saab95 extends Car {
         super(2,125, Color.red,"Saab95", VehicleType.CAR);
         transform.stopEngine();
     }
-     protected void setTurboOn(){
+     public void setTurboOn(){
 	    transform.TurboOn = true;
     }
 
-     protected void setTurboOff(){
+     public void setTurboOff(){
 	    transform.TurboOn = false;
+    }
+
+    //--- Getters --- \\
+    public boolean getTurboValue(){
+        return this.transform.TurboOn;
     }
 
 }
