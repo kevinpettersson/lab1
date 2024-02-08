@@ -86,6 +86,33 @@ public abstract class Car implements Movable {
     public Color getColor(){
         return this.color;
     }
+    public double getEnginepower(){
+        return this.transform.getEnginepower();
+    }
+
+    public double getCurrentSpeed(){
+        return this.transform.currentSpeed;
+    }
+    public double getSpeedFactor(){
+        return this.transform.speedFactor();
+    }
+    public double getPosX() {
+        return this.position.x;
+    }
+    public double getPosY() {
+        return this.position.y;
+    }
     // ---- SETTERS ---- \\
-    public void setColor(Color clr) { this.color = clr; }
+    public void setColor(Color clr){
+        this.color = clr;
+    }
+    public void setCurrentSpeed(double value){
+        this.transform.currentSpeed = value;
+    }
+    public void setGas(double value){
+        this.transform.gas(value);
+    }
+    public void setBrake(double value){
+        this.transform.brake(value);
+    }
 }
