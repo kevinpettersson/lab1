@@ -1,12 +1,6 @@
-import lab1.*;
-import org.junit.jupiter.api.Test;
-import java.awt.image.ConvolveOp;
+package lab1;
 
-/*
-To potential TA who reveiw's our progress!
-We have gone through our test and our code works! However when packaging our code from lab one we couldn't reach the variables needed.
-We indend to ask about this next time we have a lab.
-*/
+import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class CarTest {
@@ -111,4 +105,3 @@ class CarTest {
         saab.setBrake(0.2);
         assertTrue(before > saab.getCurrentSpeed());
     }
-}
