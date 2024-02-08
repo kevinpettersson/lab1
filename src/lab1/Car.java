@@ -23,6 +23,21 @@ public abstract class Car implements Movable {
     }
 
     // ---- MOVE ---- \\
+    public void setX(double amount){
+        this.position.x = amount;
+    }
+    public void setY(double amount){
+        this.position.y = amount;
+    }
+    public void stopEngine(){
+        this.transform.stopEngine();
+    }
+    public void brake(double amount){
+        this.transform.brake(amount);
+    }
+    public void gas(double amount){
+        this.transform.gas(amount);
+    }
     public void move(){
         switch (direction) {
             case NORTH:
@@ -73,6 +88,12 @@ public abstract class Car implements Movable {
     }
 
     // ---- GETTERS ---- \\
+    public double getY(){
+        return this.position.getY();
+    }
+    public double getX(){
+        return this.position.getX();
+    }
     public VehicleType getVehicleType(){
         return this.type;
     }

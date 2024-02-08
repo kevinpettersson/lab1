@@ -32,6 +32,8 @@ public class CarController {
         CarController cc = new CarController();
 
         cc.cars.add(new Volvo240());
+        cc.cars.add(new Saab95()); // oklart om detta är rätt.
+        cc.cars.add(new Scania()); // oklart om  detta är rätt.
 
         // Start a new view and send a reference of self
         cc.frame = new CarView("Vroom Vroom Car go Zoom Zoom", cc);
@@ -45,13 +47,27 @@ public class CarController {
     * */
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
+
             for (Car car : cars) {
+                double cX = car.getX();
+                double cY = car.getY();
                 car.move();
-                int x = (int) Math.round(car.position().getX());                //ASK TA! Position values protected, how do we access?
-                int y = (int) Math.round(car.position().getY());                //ASK TA! Position values protected, how do we access?
+                int x = (int) Math.round(car.getX());
+                int y = (int) Math.round(car.getY());
                 frame.drawPanel.moveit(x, y);
                 // repaint() calls the paintComponent method of the panel
                 frame.drawPanel.repaint();
+                if(cY == 0 || cY == 500){
+                    car.stopEngine();
+                    car.turnLeft();
+                    car.turnLeft();
+                }
+                if (cY >= 500){
+                    car.setY(cY - 1);
+                }
+                if (cY <= 0){
+                    car.setY(cY + 1);
+                }
             }
         }
     }
@@ -60,7 +76,13 @@ public class CarController {
     void gas(int amount) {
         double gas = ((double) amount) / 100;
         for (Car car : cars){
-            car.transform.gas(gas);                                             //ASK TA! Position values protected, how do we access?
+            car.gas(gas);
+        }
+    }
+    void brake(int amount) {
+        double brake = ((double) amount) / 100;
+        for (Car car : cars){
+            car.brake(brake);
         }
     }
 }

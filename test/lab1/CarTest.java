@@ -105,3 +105,5 @@ class CarTest {
         saab.setBrake(0.2);
         assertTrue(before > saab.getCurrentSpeed());
     }
+
+}

@@ -11,6 +11,12 @@ public class Point {
         this.x = nx;
         this.y = ny;
     }
+    public void setX(double amount){
+        this.x = amount;
+    }
+    public void setY(double amount){
+        this.y = amount;
+    }
 
     public double getX() {
         return this.x;
