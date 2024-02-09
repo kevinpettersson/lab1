@@ -26,6 +26,9 @@ public class CarController {
     ArrayList<Car> cars = new ArrayList<>();
 
     //methods:
+    public CarController getCC(){
+        return this;
+    }
 
     public static void main(String[] args) {
         // Instance of this class
@@ -54,7 +57,7 @@ public class CarController {
                 car.move();
                 int x = (int) Math.round(car.getX());
                 int y = (int) Math.round(car.getY());
-                frame.drawPanel.moveit(x, y);
+                frame.drawPanel.moveit(x, y, car);
                 // repaint() calls the paintComponent method of the panel
                 frame.drawPanel.repaint();
                 if(cY == 0 || cY == 500){

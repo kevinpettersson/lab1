@@ -3,9 +3,12 @@ package lab1;
 public class Point {
     protected double x;
     protected double y;
-    Point(double x, double y) {
+    public Point(double x, double y) {
         this.x = x;
         this.y = y;
+    }
+    public Point getPoint(Car car){
+        return car.position;
     }
     public void setPos(double nx, double ny) {
         this.x = nx;

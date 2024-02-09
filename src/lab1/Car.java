@@ -23,6 +23,7 @@ public abstract class Car implements Movable {
     }
 
     // ---- MOVE ---- \\
+
     public void setX(double amount){
         this.position.x = amount;
     }
@@ -88,6 +89,9 @@ public abstract class Car implements Movable {
     }
 
     // ---- GETTERS ---- \\
+    public Point getPoint(Car car){
+        return car.position.getPoint(car);
+    }
     public double getY(){
         return this.position.getY();
     }

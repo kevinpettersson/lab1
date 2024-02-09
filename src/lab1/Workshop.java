@@ -11,7 +11,7 @@ public class Workshop <T extends Car> {
     private ArrayList<T> currentLoad;
 
 
-    Workshop(int capacity, Point location){
+    public Workshop(int capacity, Point location){
          this.capacity = capacity;                  // Total amount of cars the workshop can handle.
          this.completedWork = new ArrayList<>();    // A list to store models we've completed
          this.currentLoad = new ArrayList<>();      // The current cars handled by the workshop.
@@ -49,6 +49,12 @@ public class Workshop <T extends Car> {
 
     // ---- GETTERS ---- \\
 
+    public double getX(){
+        return this.location.getX();
+    }
+    public double getY(){
+        return this.location.getY();
+    }
     public ArrayList<String> getCompletedWork(){
         return this.completedWork;
     }
