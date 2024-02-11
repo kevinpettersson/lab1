@@ -13,8 +13,6 @@ import javax.swing.*;
 // This panel represents the animated part of the view with the car images.
 
 public class DrawPanel extends JPanel{
-
-    ArrayList<Car> cars = CarController.getCars();
     // Just a single image, TODO: Generalize
     BufferedImage volvoImage;
     BufferedImage scaniaImage;
@@ -25,21 +23,19 @@ public class DrawPanel extends JPanel{
     //Point volvoPoint = new Point();
     //Point scaniaPoint = new Point(100,100);
     //Point saabPoint = new Point(200,200);
+    ArrayList<Car> cars = CarController.getCars(); //Gets the list of cars from the CarController class.
 
     Workshop<Volvo240> volvo240Workshop = new Workshop<>(10, new Point(300,300));
     //Point volvoWorkshopPoint = new Point (300,300);
-    //CarController cc = cc.getCC();
+
 
     // TODO: Make this general for all cars
+    // Now moveIt takes in a car as argument to make it more general.
+    // Method gets called in CarController.
     void moveit(int x, int y, Car car){
 
-        for (Car c : cars) {
-            c.setX(x);
-            c.setY(y);
-        }
-
-        //volvoPoint.x = x;
-        //volvoPoint.y = y;
+        car.setX(x);
+        car.setY(y);
     }
 
     // Initializes the panel and reads the images
@@ -71,16 +67,20 @@ public class DrawPanel extends JPanel{
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+
         for (Car car : cars) {
             if (car instanceof Volvo240) {
-                g.drawImage(volvoImage, (int) car.getX(), (int) car.getY(), null);
+                g.drawImage(volvoImage, (int) Math.round(car.getX()), (int) Math.round(car.getY()), null);
             }
             if (car instanceof Saab95) {
-                g.drawImage(saabImage, (int) car.getX(), (int) car.getY(), null);
+                g.drawImage(saabImage, (int) Math.round(car.getX()), (int) Math.round(car.getY()), null);
             }
             if (car instanceof Scania) {
-                g.drawImage(scaniaImage, (int) car.getX(), (int) car.getY(), null);
+                g.drawImage(scaniaImage, (int) Math.round(car.getX()), (int) Math.round(car.getY()), null);
             }
+            //if (car instanceof CarTransport){
+            //    g.drawImage(scaniaImage, (int) car.getX(), (int) car.getY(), null);
+            //}
         }
          // see javadoc for more info on the parameters
         g.drawImage(volvoWorkshopImage, (int) volvo240Workshop.getX(), (int) volvo240Workshop.getY(), null);

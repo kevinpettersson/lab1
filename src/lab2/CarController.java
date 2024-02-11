@@ -36,12 +36,12 @@ public class CarController {
         Volvo240 volvo240 = new Volvo240();
         Saab95 saab95 = new Saab95();
         Scania scania = new Scania();
-        saab95.setPos(0,100);
-        scania.setPos(0,200);
+        saab95.setPos(100,100);
+        scania.setPos(200,200);
 
-        cc.cars.add(volvo240);
-        cc.cars.add(saab95); // oklart om detta är rätt.
-        cc.cars.add(scania); // oklart om  detta är rätt.
+        cars.add(volvo240);
+        cars.add(saab95); // oklart om detta är rätt.
+        cars.add(scania); // oklart om  detta är rätt.
 
         // Start a new view and send a reference of self
         cc.frame = new CarView("Vroom Vroom Car go Zoom Zoom", cc);
@@ -63,6 +63,7 @@ public class CarController {
                 int x = (int) Math.round(car.getX());
                 int y = (int) Math.round(car.getY());
                 frame.drawPanel.moveit(x, y, car);
+
                 // repaint() calls the paintComponent method of the panel
                 frame.drawPanel.repaint();
                 if(cY == 0 || cY == 500){
