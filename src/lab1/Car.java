@@ -24,15 +24,6 @@ public abstract class Car implements Movable {
 
     // ---- MOVE ---- \\
 
-    public void setX(double amount){
-        this.position.x = amount;
-    }
-    public void setY(double amount){
-        this.position.y = amount;
-    }
-    public void stopEngine(){
-        this.transform.stopEngine();
-    }
     public void brake(double amount){
         this.transform.brake(amount);
     }
@@ -128,6 +119,18 @@ public abstract class Car implements Movable {
         return this.position.y;
     }
     // ---- SETTERS ---- \\
+    public void setPos(double nx, double ny){
+        this.position.setPos(nx,ny);
+    }
+    public void setX(double amount){
+        this.position.setX(amount);
+    }
+    public void setY(double amount){
+        this.position.setY(amount);
+    }
+    public void stopEngine(){
+        this.transform.stopEngine();
+    }
     public void setColor(Color clr){
         this.color = clr;
     }

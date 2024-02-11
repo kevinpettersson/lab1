@@ -13,17 +13,19 @@ import javax.swing.*;
 // This panel represents the animated part of the view with the car images.
 
 public class DrawPanel extends JPanel{
-    CarController cc = new CarController(); // SKA ÄNDRAS !!!!!!!!!!!!!!!!!
+
+    ArrayList<Car> cars = CarController.getCars();
     // Just a single image, TODO: Generalize
     BufferedImage volvoImage;
     BufferedImage scaniaImage;
     BufferedImage saabImage;
+    BufferedImage volvoWorkshopImage;
+
     // To keep track of a single car's position
     //Point volvoPoint = new Point();
     //Point scaniaPoint = new Point(100,100);
     //Point saabPoint = new Point(200,200);
 
-    BufferedImage volvoWorkshopImage;
     Workshop<Volvo240> volvo240Workshop = new Workshop<>(10, new Point(300,300));
     //Point volvoWorkshopPoint = new Point (300,300);
     //CarController cc = cc.getCC();
@@ -31,7 +33,7 @@ public class DrawPanel extends JPanel{
     // TODO: Make this general for all cars
     void moveit(int x, int y, Car car){
 
-        for (Car c : cc.cars) {
+        for (Car c : cars) {
             c.setX(x);
             c.setY(y);
         }
@@ -69,7 +71,7 @@ public class DrawPanel extends JPanel{
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        for (Car car : cc.cars) {
+        for (Car car : cars) {
             if (car instanceof Volvo240) {
                 g.drawImage(volvoImage, (int) car.getX(), (int) car.getY(), null);
             }

@@ -23,20 +23,25 @@ public class CarController {
     // The frame that represents this instance View of the MVC pattern
     CarView frame;
     //A list of cars, modify if needed
-    ArrayList<Car> cars = new ArrayList<>();
+    static ArrayList<Car> cars = new ArrayList<>(); // Gjorde den statisk
 
     //methods:
-    public CarController getCC(){
-        return this;
+    public static ArrayList<Car> getCars(){ // gjorde den statisk
+        return cars;
     }
 
     public static void main(String[] args) {
         // Instance of this class
         CarController cc = new CarController();
+        Volvo240 volvo240 = new Volvo240();
+        Saab95 saab95 = new Saab95();
+        Scania scania = new Scania();
+        saab95.setPos(0,100);
+        scania.setPos(0,200);
 
-        cc.cars.add(new Volvo240());
-        cc.cars.add(new Saab95()); // oklart om detta är rätt.
-        cc.cars.add(new Scania()); // oklart om  detta är rätt.
+        cc.cars.add(volvo240);
+        cc.cars.add(saab95); // oklart om detta är rätt.
+        cc.cars.add(scania); // oklart om  detta är rätt.
 
         // Start a new view and send a reference of self
         cc.frame = new CarView("Vroom Vroom Car go Zoom Zoom", cc);
