@@ -36,8 +36,8 @@ public class CarController {
         Volvo240 volvo240 = new Volvo240();
         Saab95 saab95 = new Saab95();
         Scania scania = new Scania();
-        saab95.setPos(100,100);
-        scania.setPos(200,200);
+        saab95.setPos(0,100);
+        scania.setPos(0,200);
 
         cars.add(volvo240);
         cars.add(saab95); // oklart om detta är rätt.

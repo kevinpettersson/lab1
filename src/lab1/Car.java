@@ -118,7 +118,9 @@ public abstract class Car implements Movable {
     public double getPosY() {
         return this.position.y;
     }
+
     // ---- SETTERS ---- \\
+    public void startEngine() { this.transform.startEngine();  }
     public void setPos(double nx, double ny){
         this.position.setPos(nx,ny);
     }

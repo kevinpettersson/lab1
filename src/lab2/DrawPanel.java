@@ -19,15 +19,9 @@ public class DrawPanel extends JPanel{
     BufferedImage saabImage;
     BufferedImage volvoWorkshopImage;
 
-    // To keep track of a single car's position
-    //Point volvoPoint = new Point();
-    //Point scaniaPoint = new Point(100,100);
-    //Point saabPoint = new Point(200,200);
     ArrayList<Car> cars = CarController.getCars(); //Gets the list of cars from the CarController class.
 
     Workshop<Volvo240> volvo240Workshop = new Workshop<>(10, new Point(300,300));
-    //Point volvoWorkshopPoint = new Point (300,300);
-
 
     // TODO: Make this general for all cars
     // Now moveIt takes in a car as argument to make it more general.
@@ -59,7 +53,6 @@ public class DrawPanel extends JPanel{
         {
             ex.printStackTrace();
         }
-
     }
 
     // This method is called each time the panel updates/refreshes/repaints itself
