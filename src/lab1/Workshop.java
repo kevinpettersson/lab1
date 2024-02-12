@@ -30,7 +30,7 @@ public class Workshop <T extends Car> {
                 car.position.x = this.location.x + 1;
                 car.position.y = this.location.y + 1;
                 completedWork.add(car.getModelName());
-                return; //this.currentLoad.get(i); FRÅGA KEVIN HUR FAN HAN TÄNKTE <3 (Med kärlek dock)
+                return;
             }
         }
         throw new IllegalArgumentException("We dont have any car with given modelname");
@@ -42,6 +42,7 @@ public class Workshop <T extends Car> {
             currentLoad.add(car);
             car.position.x = this.location.x;
             car.position.y = this.location.y;
+            car.transform.EngineOn = false;
         } else {
             throw new IllegalArgumentException("Can't leave this vehicle here, workshop is full");
         }
