@@ -94,4 +94,49 @@ public class CarController {
             car.brake(brake);
         }
     }
+    void saabTurboOn(){
+        for (int i = 0; i < cars.size(); i++){
+            if (cars.get(i) instanceof Saab95){
+                ((Saab95) cars.get(i)).setTurboOn();
+            }
+        }
+    }
+    void saabTurboOff(){
+        for (int i = 0; i < cars.size(); i++) {
+            if (cars.get(i) instanceof Saab95){
+                ((Saab95) cars.get(i)).setTurboOff();
+            }
+        }
+    }
+    void stopEngineAll(){
+        for (Car car : cars){
+            car.stopEngine();
+        }
+    }
+    void startEngineAll(){
+        for (Car car : cars){
+            car.startEngine();
+        }
+    }
+    void liftAllBeds(){
+        for (Car car : cars){
+            if (car instanceof Scania){
+                ((Scania) car).raiseTruckBed(70);
+            }
+            if (car instanceof CarTransport){
+                ((CarTransport) car).raiseTruckBed(70);
+            }
+        }
+    }
+    void lowerAllBeds(){
+        for (Car car : cars){
+            if (car instanceof Scania){
+                ((Scania) car).lowerTruckBed(70);
+            }
+            if (car instanceof CarTransport){
+                ((CarTransport) car).lowerTruckBed(70);
+            }
+        }
+    }
 }
+
