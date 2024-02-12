@@ -31,19 +31,21 @@ public abstract class Car implements Movable {
         this.transform.gas(amount);
     }
     public void move(){
-        switch (direction) {
-            case NORTH:
-                this.position.y += transform.getCurrentSpeed();
-                break;
-            case WEST:
-                this.position.x -= transform.getCurrentSpeed();
-                break;
-            case SOUTH:
-                this.position.y -= transform.getCurrentSpeed();
-                break;
-            case EAST:
-                this.position.x += transform.getCurrentSpeed();
-                break;
+        if (this.transform.EngineOn) {
+            switch (direction) {
+                case NORTH:
+                    this.position.y += transform.getCurrentSpeed();
+                    break;
+                case WEST:
+                    this.position.x -= transform.getCurrentSpeed();
+                    break;
+                case SOUTH:
+                    this.position.y -= transform.getCurrentSpeed();
+                    break;
+                case EAST:
+                    this.position.x += transform.getCurrentSpeed();
+                    break;
+            }
         }
     }
     public void turnLeft(){

@@ -55,7 +55,10 @@ public class Transform {
         }
     }
     public void startEngine() {this.EngineOn = true; }
-    public void stopEngine() { this.EngineOn = false; }
+    public void stopEngine() { 
+        this.EngineOn = false;
+        this.currentSpeed = 0;
+    }
 
 
     // Getters
