@@ -120,7 +120,7 @@ public abstract class Car implements Movable {
     }
 
     // ---- SETTERS ---- \\
-    public void startEngine() { this.transform.startEngine();  }
+
     public void setPos(double nx, double ny){
         this.position.setPos(nx,ny);
     }
@@ -129,6 +129,9 @@ public abstract class Car implements Movable {
     }
     public void setY(double amount){
         this.position.setY(amount);
+    }
+    public void startEngine() {
+        this.transform.startEngine();
     }
     public void stopEngine(){
         this.transform.stopEngine();

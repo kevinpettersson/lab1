@@ -8,7 +8,6 @@ public class Scania extends Car implements iTruckBed {
     public Scania() {
         super(2, 125, Color.BLACK, "Scania", VehicleType.TRUCK);
         this.tb = new TruckBed();
-        transform.stopEngine();
     }
 
 

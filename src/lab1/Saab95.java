@@ -6,7 +6,6 @@ public class Saab95 extends Car {
     
     public Saab95(){
         super(2,125, Color.red,"Saab95", VehicleType.CAR);
-        transform.stopEngine();
     }
      public void setTurboOn(){
 	    transform.TurboOn = true;
@@ -17,7 +16,7 @@ public class Saab95 extends Car {
     }
 
     //--- Getters --- \\
-    public boolean getTurboValue(){
+    public boolean getTurboState(){
         return this.transform.TurboOn;
     }
 

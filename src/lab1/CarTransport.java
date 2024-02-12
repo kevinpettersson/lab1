@@ -13,7 +13,6 @@ public class CarTransport extends Car implements iTruckBed {
         super(2,125, Color.BLUE,"CarTransport", VehicleType.TRUCK);
         this.tb = new TruckBed();
         this.truckLoad = new Stack<Car>();
-        transform.stopEngine();
     }
     @Override
     public void move(){

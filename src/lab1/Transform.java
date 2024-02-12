@@ -3,6 +3,7 @@ package lab1;
 public class Transform {
     protected double currentSpeed;
     private final double enginepower;
+    protected Boolean EngineOn;
     protected Boolean TurboOn;
     protected Boolean CargoDoorClosed;
     double TrimFactor;
@@ -15,6 +16,7 @@ public class Transform {
         this.TurboOn = false;
         this.TrimFactor = 1;
         this.CargoDoorClosed = true;
+        this.EngineOn = false;
     }
 
     /* Redone to calculate the speed factor for any given vehicle, for those who don't utilise a (for example) truckbed.
@@ -52,8 +54,8 @@ public class Transform {
             throw new IllegalArgumentException("Too much brake");
         }
     }
-    public void startEngine() { this.currentSpeed = 0; }
-    public void stopEngine() { this.currentSpeed = 0; }
+    public void startEngine() {this.EngineOn = true; }
+    public void stopEngine() { this.EngineOn = false; }
 
 
     // Getters
@@ -69,6 +71,7 @@ public class Transform {
     public Boolean getCargoDoorClosed(){
         return this.CargoDoorClosed;
     }
+    public Boolean getEngineState(){return this.EngineOn;}
 
     //Setters
     public void setCargoDoorClosed(Boolean value){
