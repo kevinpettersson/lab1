@@ -36,6 +36,7 @@ public class CarController {
         Volvo240 volvo240 = new Volvo240();
         Saab95 saab95 = new Saab95();
         Scania scania = new Scania();
+        volvo240.setPos(300,0);
         saab95.setPos(0,100);
         scania.setPos(0,200);
 

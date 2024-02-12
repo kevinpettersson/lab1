@@ -64,6 +64,10 @@ public class DrawPanel extends JPanel{
         for (Car car : cars) {
             if (car instanceof Volvo240) {
                 g.drawImage(volvoImage, (int) Math.round(car.getX()), (int) Math.round(car.getY()), null);
+                if ((int) car.getX() == (int) volvo240Workshop.getX() || (int) car.getY() == (int) volvo240Workshop.getY()){
+                    volvo240Workshop.leaveVehicle((Volvo240) car);
+                    cars.remove(car);
+                }
             }
             if (car instanceof Saab95) {
                 g.drawImage(saabImage, (int) Math.round(car.getX()), (int) Math.round(car.getY()), null);
