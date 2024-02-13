@@ -30,15 +30,6 @@ public class DrawPanel extends JPanel{
 
         car.setX(x);
         car.setY(y);
-        // Hitta ett sätt runt ConcurrentModificationException när volvo ska laddas in i en workshop.
-        // Heja heja!! <3
-        if ((int) car.getY() >= 300 && car instanceof Volvo240){
-        //if ((int) car.getX() == (int) volvo240Workshop.getX() && (int) car.getY() == (int) volvo240Workshop.getY()){
-            ArrayList<Car> temp = cars;
-            volvo240Workshop.leaveVehicle((Volvo240) car);
-            temp.remove(car);
-            cars = temp;
-        }
     }
 
     // Initializes the panel and reads the images
@@ -80,9 +71,9 @@ public class DrawPanel extends JPanel{
             if (car instanceof Scania) {
                 g.drawImage(scaniaImage, (int) Math.round(car.getX()), (int) Math.round(car.getY()), null);
             }
-            //if (car instanceof CarTransport){
-            //    g.drawImage(scaniaImage, (int) car.getX(), (int) car.getY(), null);
-            //}
+            if (car instanceof CarTransport){
+                g.drawImage(scaniaImage, (int) car.getX(), (int) car.getY(), null);
+            }
         }
          // see javadoc for more info on the parameters
         g.drawImage(volvoWorkshopImage, (int) volvo240Workshop.getX(), (int) volvo240Workshop.getY(), null);

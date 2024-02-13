@@ -1,6 +1,8 @@
 package lab1;
 
 import java.awt.*;
+import java.util.Vector;
+
 public abstract class Car implements Movable {
     private final int nrDoors;              //Number of door will never change for a specific car
     private Color color;                    //Color can change as well
@@ -9,6 +11,7 @@ public abstract class Car implements Movable {
     protected Point position;               //Position will change over time.
     private final VehicleType type;         //Defines the Vehicle type.
     protected Transform transform;
+
 
     public Car (int nrDoors, double enginePower, Color color, String modelName, VehicleType type) {
 
@@ -122,7 +125,9 @@ public abstract class Car implements Movable {
     }
 
     // ---- SETTERS ---- \\
-
+    public void setDirection(Direction dir){
+        this.direction = dir;
+    }
     public void setPos(double nx, double ny){
         this.position.setPos(nx,ny);
     }

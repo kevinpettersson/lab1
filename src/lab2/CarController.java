@@ -39,6 +39,7 @@ public class CarController {
         volvo240.setPos(300,0);
         saab95.setPos(0,100);
         scania.setPos(0,200);
+        //volvo240.setDirection(Direction.EAST);
 
         cars.add(volvo240);
         cars.add(saab95); // oklart om detta är rätt.
@@ -58,29 +59,54 @@ public class CarController {
         public void actionPerformed(ActionEvent e) {
 
             for (Car car : cars) {
-                double cX = car.getX();
-                double cY = car.getY();
                 car.move();
                 int x = (int) Math.round(car.getX());
                 int y = (int) Math.round(car.getY());
                 frame.drawPanel.moveit(x, y, car);
-
                 // repaint() calls the paintComponent method of the panel
                 frame.drawPanel.repaint();
-                if(cY == 0 || cY == 500){
-                    car.stopEngine();
-                    car.turnLeft();
-                    car.turnLeft();
-                }
-                if (cY >= 500){
-                    car.setY(cY - 1);
-                }
-                if (cY <= 0){
-                    car.setY(cY + 1);
+                adjustCarPosition( x, y, car);
+            }
+            ifCarCollideWithWorkshop();
+            for (int i = 0; i < cars.size(); i++) {
+                for (int j = i+1; j < cars.size()-1; j++) {
+                    if ((int) cars.get(i).getY() == (int) cars.get(j).getY()){
+                        cars.get(i).stopEngine();
+                        cars.get(j).stopEngine();
+                    }
                 }
             }
         }
     }
+    public void ifCarCollideWithWorkshop(){
+        Workshop<Volvo240> volvoWorkshop = frame.drawPanel.volvo240Workshop;
+        Volvo240 volvo = new Volvo240();
+        for (Car car : cars){
+            if (car instanceof Volvo240){
+                volvo = (Volvo240) car;
+            }
+        }
+        if ((int) volvo.getY() >= (int) volvoWorkshop.getY() && volvo.getX() >= volvoWorkshop.getX()) {
+            cars.remove(volvo);
+            volvoWorkshop.leaveVehicle(volvo);
+        }
+    }
+    public void adjustCarPosition(int cX, int cY, Car car) {
+        if (cY == -1 || cY >= 501) {
+            car.stopEngine();
+            car.turnLeft();
+            car.turnLeft();
+            car.setY(cY >= 500 ? 500 - 2 : 2);
+        }
+
+        if (cX <= -1 || cX >= 701) {
+            car.stopEngine();
+            car.turnLeft();
+            car.turnLeft();
+            car.setX(cX <= 0 ? 2 : 700 - 2);
+        }
+    }
+
 
     // Calls the gas method for each car once
     void gas(int amount) {

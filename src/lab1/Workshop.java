@@ -38,7 +38,7 @@ public class Workshop <T extends Car> {
 
     public void leaveVehicle(T car){
 
-        if (currentLoad.size() < capacity) {
+        if (currentLoad.size() < capacity && car instanceof T) {
             currentLoad.add(car);
             car.position.x = this.location.x;
             car.position.y = this.location.y;
