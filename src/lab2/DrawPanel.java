@@ -21,7 +21,7 @@ public class DrawPanel extends JPanel{
 
     ArrayList<Car> cars = CarController.getCars(); //Gets the list of cars from the CarController class.
 
-    Workshop<Volvo240> volvo240Workshop = new Workshop<>(10, new Point(300,300));
+    Workshop<Volvo240> volvo240Workshop = new Workshop<>(10, new Point(300,200));
 
     // TODO: Make this general for all cars
     // Now moveIt takes in a car as argument to make it more general.
