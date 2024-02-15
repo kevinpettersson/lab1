@@ -1,6 +1,7 @@
 package lab1;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.Vector;
 
 public abstract class Car implements Movable {
@@ -10,8 +11,7 @@ public abstract class Car implements Movable {
     private Direction direction;            //Direction the car is facing will change over time.
     protected Point position;               //Position will change over time.
     private final VehicleType type;         //Defines the Vehicle type.
-    protected Transform transform;
-
+    protected Transform transform;          //Handles all our
 
     public Car (int nrDoors, double enginePower, Color color, String modelName, VehicleType type) {
 

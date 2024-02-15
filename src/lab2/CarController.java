@@ -65,7 +65,7 @@ public class CarController {
                 frame.drawPanel.moveit(x, y, car);
                 // repaint() calls the paintComponent method of the panel
                 frame.drawPanel.repaint();
-                adjustCarPosition( x, y, car);
+                adjustCarPosition(x, y, car);
             }
             ifCarCollideWithWorkshop();
             for (int i = 0; i < cars.size(); i++) {
