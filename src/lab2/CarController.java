@@ -68,16 +68,38 @@ public class CarController {
                 adjustCarPosition(x, y, car);
             }
             ifCarCollideWithWorkshop();
-            for (int i = 0; i < cars.size(); i++) {
-                for (int j = i+1; j < cars.size()-1; j++) {
-                    if ((int) cars.get(i).getY() == (int) cars.get(j).getY()){
-                        cars.get(i).stopEngine();
-                        cars.get(j).stopEngine();
-                    }
+            handleCollition();
+
+        }
+    }
+    //When the the "behind" vehicle collides with the vehicle in front, the approaching vehicle will "crash" and move
+    public void handleCollition(){
+        for (int i = 0; i < cars.size()-1; i++) {
+            for (int j = i+1; j < cars.size(); j++) {
+                Car car1 = cars.get(i);
+                Car car2 = cars.get(j);
+                if (collition(car1, car2)){
+                    car1.setPos(car1.getX() + 2, car1.getY() + 2);
+                    car1.stopEngine();
+                    car2.stopEngine();
                 }
             }
         }
     }
+    //Checks potential collition between two cars. Returns a boolean.
+    public boolean collition(Car carA, Car carB) {
+        for (int i = 0; i < cars.size() - 1; i++) {
+            for (int j = i + 1; j < cars.size(); j++) {
+                if (carA.getY() < (carB.getY() + 60) && (carA.getY() > (carB.getY() - 60))){
+                    if (carA.getX() > (carB.getX() - 100) && (carA.getX() < (carB.getX() + 100))){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
     public void ifCarCollideWithWorkshop(){
         Workshop<Volvo240> volvoWorkshop = frame.drawPanel.volvo240Workshop;
         Volvo240 volvo = new Volvo240();
@@ -92,7 +114,7 @@ public class CarController {
         }
     }
     public void adjustCarPosition(int cX, int cY, Car car) {
-        if (cY == -1 || cY >= 501) {
+        if (cY <= -1 || cY >= 501) {
             car.stopEngine();
             car.turnLeft();
             car.turnLeft();
