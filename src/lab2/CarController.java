@@ -36,14 +36,16 @@ public class CarController {
         Volvo240 volvo240 = new Volvo240();
         Saab95 saab95 = new Saab95();
         Scania scania = new Scania();
-        volvo240.setPos(300,0);
+        volvo240.setPos(0,300);
         saab95.setPos(0,100);
         scania.setPos(0,200);
-        //volvo240.setDirection(Direction.EAST);
+        volvo240.setDirection(Direction.EAST);
+        saab95.setDirection(Direction.EAST);
+        scania.setDirection(Direction.EAST);
 
         cars.add(volvo240);
-        cars.add(saab95); // oklart om detta är rätt.
-        cars.add(scania); // oklart om  detta är rätt.
+        cars.add(saab95);
+        cars.add(scania);
 
         // Start a new view and send a reference of self
         cc.frame = new CarView("Vroom Vroom Car go Zoom Zoom", cc);
@@ -100,6 +102,7 @@ public class CarController {
         return false;
     }
 
+    // If the car collides with the workshop then we remove the car from the list and adds the car to the workshop.
     public void ifCarCollideWithWorkshop(){
         Workshop<Volvo240> volvoWorkshop = frame.drawPanel.volvo240Workshop;
         Volvo240 volvo = new Volvo240();
@@ -113,6 +116,9 @@ public class CarController {
             volvoWorkshop.leaveVehicle(volvo);
         }
     }
+
+    // Checks so the car is within bounds of the frame. If not we stop the car, turn it 180 degress.
+    // Sets a new position that is within bounds.
     public void adjustCarPosition(int cX, int cY, Car car) {
         if (cY <= -1 || cY >= 501) {
             car.stopEngine();

@@ -13,7 +13,7 @@ import javax.swing.*;
 // This panel represents the animated part of the view with the car images.
 
 public class DrawPanel extends JPanel{
-    // Just a single image, TODO: Generalize
+    // Just a single image
     BufferedImage volvoImage;
     BufferedImage scaniaImage;
     BufferedImage saabImage;
@@ -72,7 +72,7 @@ public class DrawPanel extends JPanel{
                 g.drawImage(scaniaImage, (int) Math.round(car.getX()), (int) Math.round(car.getY()), null);
             }
             if (car instanceof CarTransport){
-                g.drawImage(scaniaImage, (int) car.getX(), (int) car.getY(), null);
+                g.drawImage(scaniaImage, (int) Math.round(car.getX()), (int) Math.round(car.getY()), null);
             }
         }
          // see javadoc for more info on the parameters
