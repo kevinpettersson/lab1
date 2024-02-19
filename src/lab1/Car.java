@@ -92,7 +92,7 @@ public abstract class Car implements Movable {
         return this.position.getY();
     }
     public double getX(){
-        return this.position.getX();
+        return this.Gps.position.getX();
     }
     public VehicleType getVehicleType(){
         return this.type;

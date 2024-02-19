@@ -21,17 +21,6 @@ public class DrawPanel extends JPanel{
 
     ArrayList<Car> cars = CarController.getCars(); //Gets the list of cars from the CarController class.
 
-    Workshop<Volvo240> volvo240Workshop = new Workshop<>(10, new Point(300,200));
-
-    // TODO: Make this general for all cars
-    // Now moveIt takes in a car as argument to make it more general.
-    // Method gets called in CarController.
-    void moveit(int x, int y, Car car){
-
-        car.setX(x);
-        car.setY(y);
-    }
-
     // Initializes the panel and reads the images
     public DrawPanel(int x, int y) {
         this.setDoubleBuffered(true);
@@ -76,6 +65,6 @@ public class DrawPanel extends JPanel{
             }
         }
          // see javadoc for more info on the parameters
-        g.drawImage(volvoWorkshopImage, (int) volvo240Workshop.getX(), (int) volvo240Workshop.getY(), null);
+        g.drawImage(volvoWorkshopImage, (int) CarController.volvo240Workshop.getX(), (int) CarController.volvo240Workshop.getY(), null);
     }
 }

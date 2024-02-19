@@ -8,6 +8,7 @@ class CarTest {
     @Test
     void move() {
         Saab95 saab = new Saab95();
+        saab.transform.startEngine();
         saab.setCurrentSpeed(1);
         saab.move();
         assertEquals(saab.getPosX(), 0);

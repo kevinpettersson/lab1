@@ -13,10 +13,11 @@ class CarTransportTest {
         truck.lowerTruckBed(70);
         truck.loadTruck(saab);
         truck.transform.currentSpeed = 1;
+        truck.transform.startEngine();
         truck.move();
 
-        Point carPos = truck.truckLoad.peek().position;
-        Point truckPos = truck.position;
+        Point carPos = truck.truckLoad.peek().Gps.position;
+        Point truckPos = truck.Gps.position;
 
         assertEquals(truckPos.getY(), carPos.getY());
         assertEquals(truckPos.getX(), carPos.getX());
@@ -40,7 +41,7 @@ class CarTransportTest {
     }
 
     @Test
-    void unloadTruck() {
+    void UnloadTruck() {
         CarTransport ct = new CarTransport();
         ct.transform.currentSpeed = 0;
         ct.lowerTruckBed(70);
@@ -51,8 +52,8 @@ class CarTransportTest {
         ct.unloadTruck();
 
 
-        assertEquals(saab.position.x, 1);
-        assertEquals(saab.position.y, 1);
+        assertEquals(saab.Gps.position.x, 1);
+        assertEquals(saab.Gps.position.y, 1);
     }
 
     @Test

@@ -22,14 +22,15 @@ public class CarController {
 
     // The frame that represents this instance View of the MVC pattern
     CarView frame;
-    //A list of cars, modify if needed
-    static ArrayList<Car> cars = new ArrayList<>(); // Gjorde den statisk
+    //A list of cars, static so qwe can retrievie it from other classes.
+    static ArrayList<Car> cars = new ArrayList<>();
+    //A new workshop, also static so we can get it from other classes.
+    static Workshop<Volvo240> volvo240Workshop = new Workshop<>(10, new Point(300,200));
 
     //methods:
     public static ArrayList<Car> getCars(){ // gjorde den statisk
         return cars;
     }
-
     public static void main(String[] args) {
         // Instance of this class
         CarController cc = new CarController();
@@ -54,6 +55,15 @@ public class CarController {
         cc.timer.start();
     }
 
+    // TODO: Make this general for all cars
+    // Now moveIt takes in a car as argument to make it more general.
+    // Method gets called in CarController.
+    void moveit(int x, int y, Car car){
+
+        car.setX(x);
+        car.setY(y);
+    }
+
     /* Each step the TimerListener moves all the cars in the list and tells the
     * view to update its images. Change this method to your needs.
     * */
@@ -64,7 +74,7 @@ public class CarController {
                 car.move();
                 int x = (int) Math.round(car.getX());
                 int y = (int) Math.round(car.getY());
-                frame.drawPanel.moveit(x, y, car);
+                moveit(x, y, car);
                 // repaint() calls the paintComponent method of the panel
                 frame.drawPanel.repaint();
                 adjustCarPosition(x, y, car);
@@ -104,16 +114,16 @@ public class CarController {
 
     // If the car collides with the workshop then we remove the car from the list and adds the car to the workshop.
     public void ifCarCollideWithWorkshop(){
-        Workshop<Volvo240> volvoWorkshop = frame.drawPanel.volvo240Workshop;
+        //Workshop<Volvo240> volvoWorkshop = volvo240Workshop;
         Volvo240 volvo = new Volvo240();
         for (Car car : cars){
             if (car instanceof Volvo240){
                 volvo = (Volvo240) car;
             }
         }
-        if ((int) volvo.getY() >= (int) volvoWorkshop.getY() && volvo.getX() >= volvoWorkshop.getX()) {
+        if ((int) volvo.getY() >= (int) volvo240Workshop.getY() && volvo.getX() >= volvo240Workshop.getX()) {
             cars.remove(volvo);
-            volvoWorkshop.leaveVehicle(volvo);
+            volvo240Workshop.leaveVehicle(volvo);
         }
     }
 
@@ -132,65 +142,6 @@ public class CarController {
             car.turnLeft();
             car.turnLeft();
             car.setX(cX <= 0 ? 2 : 700 - 2);
-        }
-    }
-
-
-    // Calls the gas method for each car once
-    void gas(int amount) {
-        double gas = ((double) amount) / 100;
-        for (Car car : cars){
-            car.gas(gas);
-        }
-    }
-    void brake(int amount) {
-        double brake = ((double) amount) / 100;
-        for (Car car : cars){
-            car.brake(brake);
-        }
-    }
-    void saabTurboOn(){
-        for (int i = 0; i < cars.size(); i++){
-            if (cars.get(i) instanceof Saab95){
-                ((Saab95) cars.get(i)).setTurboOn();
-            }
-        }
-    }
-    void saabTurboOff(){
-        for (int i = 0; i < cars.size(); i++) {
-            if (cars.get(i) instanceof Saab95){
-                ((Saab95) cars.get(i)).setTurboOff();
-            }
-        }
-    }
-    void stopEngineAll(){
-        for (Car car : cars){
-            car.stopEngine();
-        }
-    }
-    void startEngineAll(){
-        for (Car car : cars){
-            car.startEngine();
-        }
-    }
-    void liftAllBeds(){
-        for (Car car : cars){
-            if (car instanceof Scania){
-                ((Scania) car).raiseTruckBed(70);
-            }
-            if (car instanceof CarTransport){
-                ((CarTransport) car).raiseTruckBed(70);
-            }
-        }
-    }
-    void lowerAllBeds(){
-        for (Car car : cars){
-            if (car instanceof Scania){
-                ((Scania) car).lowerTruckBed(70);
-            }
-            if (car instanceof CarTransport){
-                ((CarTransport) car).lowerTruckBed(70);
-            }
         }
     }
 }

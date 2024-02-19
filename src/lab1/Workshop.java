@@ -27,8 +27,8 @@ public class Workshop <T extends Car> {
 
                 //Removes the car from workshop then places the car outside the workshop location
                 this.currentLoad.remove(car);
-                car.position.x = this.location.x + 1;
-                car.position.y = this.location.y + 1;
+                car.Gps.position.x = this.location.x + 1;
+                car.Gps.position.y = this.location.y + 1;
                 completedWork.add(car.getModelName());
                 return;
             }
@@ -40,8 +40,8 @@ public class Workshop <T extends Car> {
 
         if (currentLoad.size() < capacity && car instanceof T) {
             currentLoad.add(car);
-            car.position.x = this.location.x;
-            car.position.y = this.location.y;
+            car.Gps.position.x = this.location.x;
+            car.Gps.position.y = this.location.y;
             car.transform.EngineOn = false;
         } else {
             throw new IllegalArgumentException("Can't leave this vehicle here, workshop is full");
