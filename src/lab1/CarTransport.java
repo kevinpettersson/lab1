@@ -25,7 +25,7 @@ public class CarTransport extends Car implements iTruckBed {
         //Set the position of each element in the stack equal to trucks position.
         while (!truckLoad.isEmpty()) {
             Car car = truckLoad.pop();
-            car.position.setPos(this.position.getX(), this.position.getY());
+            car.Gps.position.setPos(this.Gps.position.getX(), this.Gps.position.getY());
             tmp.push(car);
         }
         //Pushes each element back to the original stack.
@@ -35,10 +35,10 @@ public class CarTransport extends Car implements iTruckBed {
 
     }
     public void loadTruck(Car car) {
-        double truckPositionX = this.position.getX();
-        double truckPositionY = this.position.getY();
-        double carPositionX = car.position.getX();
-        double carPositionY = car.position.getY();
+        double truckPositionX = this.Gps.position.getX();
+        double truckPositionY = this.Gps.position.getY();
+        double carPositionX = car.Gps.position.getX();
+        double carPositionY = car.Gps.position.getY();
 
         //Checks so vehicle type is not truck.
         if (!(car.getVehicleType() == VehicleType.TRUCK)) {
@@ -56,14 +56,14 @@ public class CarTransport extends Car implements iTruckBed {
     }
 
     public void unloadTruck() {
-        double truckX = this.position.x;
-        double truckY = this.position.y;
+        double truckX = this.Gps.position.x;
+        double truckY = this.Gps.position.y;
 
         //Pops the stack and place the load close to the truck.
         if (tb.getTruckBedAngle() == 70) {
             while(!truckLoad.isEmpty()){
                 Car car = truckLoad.pop();
-                car.position.setPos(truckX+1, truckY+1);
+                car.Gps.position.setPos(truckX+1, truckY+1);
 
             }
         }

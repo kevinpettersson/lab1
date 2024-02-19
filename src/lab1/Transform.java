@@ -54,11 +54,63 @@ public class Transform {
             throw new IllegalArgumentException("Too much brake");
         }
     }
+    public void move(Car car){
+        if (this.EngineOn) {
+            switch (car.Gps.direction) {
+                case NORTH:
+                    car.Gps.position.y += getCurrentSpeed();
+                    break;
+                case WEST:
+                    car.Gps.position.x -= getCurrentSpeed();
+                    break;
+                case SOUTH:
+                    car.Gps.position.y -= getCurrentSpeed();
+                    break;
+                case EAST:
+                    car.Gps.position.x += getCurrentSpeed();
+                    break;
+            }
+        }
+    }
+    public void turnLeft(Car car){
+        switch (car.Gps.direction) {
+            case NORTH:
+                car.Gps.direction = Direction.WEST;
+                break;
+            case WEST:
+                car.Gps.direction = Direction.SOUTH;
+                break;
+            case SOUTH:
+                car.Gps.direction = Direction.EAST;
+                break;
+            case EAST:
+                car.Gps.direction = Direction.NORTH;
+                break;
+        }
+    }
+    public void turnRight(Car car){
+        switch (car.Gps.direction) {
+            case NORTH:
+                car.Gps.direction = Direction.EAST;
+                break;
+            case WEST:
+                car.Gps.direction = Direction.NORTH;
+                break;
+            case SOUTH:
+                car.Gps.direction = Direction.WEST;
+                break;
+            case EAST:
+                car.Gps.direction = Direction.SOUTH;
+                break;
+        }
+    }
+
     public void startEngine() {this.EngineOn = true; }
     public void stopEngine() { 
         this.EngineOn = false;
         this.currentSpeed = 0;
     }
+
 
 
     // Getters

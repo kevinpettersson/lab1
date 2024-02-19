@@ -8,7 +8,7 @@ public class Point {
         this.y = y;
     }
     public Point getPoint(Car car){
-        return car.position;
+        return car.Gps.position;
     }
     public void setPos(double nx, double ny) {
         this.x = nx;
