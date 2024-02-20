@@ -7,7 +7,20 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * This class represents the full view of the MVC pattern of your car simulator.
+ * It initializes with being center on the screen and attaching it's controller in it's state.
+ * It communicates with the Controller by calling methods of it when an action fires of in
+ * each of it's components.
+ **/
+
 public class UI extends JFrame{
+
+    public UI (String framename, CarController cc){
+        initComponents(framename);
+        actionListeners();
+    }
+    Model frame = new Model();
 
     private static final int X = 800;
     private static final int Y = 800;
@@ -71,69 +84,10 @@ public class UI extends JFrame{
         startButton.setPreferredSize(new Dimension(X/5-15,200));
         this.add(startButton);
 
-
         stopButton.setBackground(Color.red);
         stopButton.setForeground(Color.black);
         stopButton.setPreferredSize(new Dimension(X/5-15,200));
         this.add(stopButton);
-
-        // This actionListener is for the gas button only
-        // TODO: Create more for each component as necessary
-        /*
-        gasButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                gas(gasAmount);
-            }
-        });
-        brakeButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                brake(gasAmount);
-            }
-        });
-
-        turboOnButton.addActionListener((new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                saabTurboOn();
-            }
-        }));
-        turboOffButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                saabTurboOff();
-            }
-        });
-
-        // START AND STOP-BUTTON
-        startButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                startEngineAll();
-            }
-        });
-        stopButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                stopEngineAll();
-            }
-        });
-
-        // LIFT AND LOWER BED-BUTTON
-        liftBedButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                liftAllBeds();
-            }
-        });
-        lowerBedButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                lowerAllBeds();
-            }
-        });
-        */
 
         // Make the frame pack all it's components by respecting the sizes if possible.
         this.pack();
@@ -146,6 +100,65 @@ public class UI extends JFrame{
         this.setVisible(true);
         // Make sure the frame exits when "x" is pressed
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+
+    public void actionListeners(){
+            // This actionListener is for the gas button only
+            // TODO: Create more for each component as necessary
+
+            gasButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    frame.gas(gasAmount);
+                }
+            });
+            brakeButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    frame.brake(gasAmount);
+                }
+            });
+
+            turboOnButton.addActionListener((new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    frame.saabTurboOn();
+                }
+            }));
+            turboOffButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    frame.saabTurboOff();
+                }
+            });
+
+            // START AND STOP-BUTTON
+            startButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    frame.startEngineAll();
+                }
+            });
+            stopButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    frame.stopEngineAll();
+                }
+            });
+
+            // LIFT AND LOWER BED-BUTTON
+            liftBedButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    frame.liftAllBeds();
+                }
+            });
+            lowerBedButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    frame.lowerAllBeds();
+                }
+            });
     }
 
 }

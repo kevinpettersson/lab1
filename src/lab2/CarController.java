@@ -21,7 +21,7 @@ public class CarController {
     private Timer timer = new Timer(delay, new TimerListener());
 
     // The frame that represents this instance View of the MVC pattern
-    CarView frame;
+    UI frame;
     //A list of cars, static so qwe can retrievie it from other classes.
     static ArrayList<Car> cars = new ArrayList<>();
     //A new workshop, also static so we can get it from other classes.
@@ -49,7 +49,7 @@ public class CarController {
         cars.add(scania);
 
         // Start a new view and send a reference of self
-        cc.frame = new CarView("Vroom Vroom Car go Zoom Zoom", cc);
+        cc.frame = new UI("Vroom Vroom Car go Zoom Zoom", cc);
 
         // Start the timer
         cc.timer.start();
@@ -100,6 +100,8 @@ public class CarController {
     }
     //Checks potential collition between two cars. Returns a boolean.
     //Rewritten with a hasPosition interface as typearguments. To generalize the method.
+    /*
+
     public boolean collition(hasPosition objA, hasPosition objB) {
         if (objA.getY() < (objB.getY() + 60) && (objA.getY() > (objB.getY() - 60))){
             if (objA.getX() > (objB.getX() - 100) && (objA.getX() < (objB.getX() + 100))){
@@ -109,7 +111,23 @@ public class CarController {
         return false;
     }
 
+     */
+    public boolean collition(Car carA, Car carB) {
+        for (int i = 0; i < cars.size() - 1; i++) {
+            for (int j = i + 1; j < cars.size(); j++) {
+                if (carA.getY() < (carB.getY() + 60) && (carA.getY() > (carB.getY() - 60))) {
+                    if (carA.getX() > (carB.getX() - 100) && (carA.getX() < (carB.getX() + 100))) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+
     // If the car collides with the workshop then we remove the car from the list and adds the car to the workshop.
+    /*
     public void ifCarCollideWithWorkshop(){
         for (Car car : cars){
             if (car instanceof Volvo240){
@@ -118,6 +136,30 @@ public class CarController {
                     volvo240Workshop.leaveVehicle((Volvo240) car);
                 }
             }
+        }
+    }
+
+
+     */
+    // If the car collides with the workshop then we remove the car from the list and adds the car to the workshop.
+    public void ifCarCollideWithWorkshop(){
+        //Workshop<Volvo240> volvoWorkshop = volvo240Workshop;
+        Volvo240 volvo = new Volvo240();
+        for (Car car : cars){
+            if (car instanceof Volvo240){
+                volvo = (Volvo240) car;
+                /*
+                if (collition(car, volvo240Workshop)) {
+                    cars.remove(car);
+                    volvo240Workshop.leaveVehicle((Volvo240) car);
+                }
+
+                 */
+            }
+        }
+        if ((int) volvo.getY() >= (int) volvo240Workshop.getY() && volvo.getX() >= volvo240Workshop.getX()) {
+            cars.remove(volvo);
+            volvo240Workshop.leaveVehicle(volvo);
         }
     }
 
@@ -138,5 +180,6 @@ public class CarController {
             car.setX(cX <= 0 ? 2 : 700 - 2);
         }
     }
+
 }
 
