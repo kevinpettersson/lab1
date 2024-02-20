@@ -99,14 +99,11 @@ public class CarController {
         }
     }
     //Checks potential collition between two cars. Returns a boolean.
-    public boolean collition(Car carA, Car carB) {
-        for (int i = 0; i < cars.size() - 1; i++) {
-            for (int j = i + 1; j < cars.size(); j++) {
-                if (carA.getY() < (carB.getY() + 60) && (carA.getY() > (carB.getY() - 60))){
-                    if (carA.getX() > (carB.getX() - 100) && (carA.getX() < (carB.getX() + 100))){
-                        return true;
-                    }
-                }
+    //Rewritten with a hasPosition interface as typearguments. To generalize the method.
+    public boolean collition(hasPosition objA, hasPosition objB) {
+        if (objA.getY() < (objB.getY() + 60) && (objA.getY() > (objB.getY() - 60))){
+            if (objA.getX() > (objB.getX() - 100) && (objA.getX() < (objB.getX() + 100))){
+                return true;
             }
         }
         return false;
@@ -114,16 +111,13 @@ public class CarController {
 
     // If the car collides with the workshop then we remove the car from the list and adds the car to the workshop.
     public void ifCarCollideWithWorkshop(){
-        //Workshop<Volvo240> volvoWorkshop = volvo240Workshop;
-        Volvo240 volvo = new Volvo240();
         for (Car car : cars){
             if (car instanceof Volvo240){
-                volvo = (Volvo240) car;
+                if (collition(car, volvo240Workshop)) {
+                    cars.remove(car);
+                    volvo240Workshop.leaveVehicle((Volvo240) car);
+                }
             }
-        }
-        if ((int) volvo.getY() >= (int) volvo240Workshop.getY() && volvo.getX() >= volvo240Workshop.getX()) {
-            cars.remove(volvo);
-            volvo240Workshop.leaveVehicle(volvo);
         }
     }
 

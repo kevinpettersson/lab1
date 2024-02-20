@@ -4,7 +4,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Vector;
 
-public abstract class Car implements Movable {
+public abstract class Car implements Movable, hasPosition {
     private final int nrDoors;              //Number of door will never change for a specific car
     private Color color;                    //Color can change as well
     private final String modelName;         //Volvo240 will always be a Volvo240

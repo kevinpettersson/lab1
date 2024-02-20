@@ -3,7 +3,7 @@ package lab1;
 import java.util.ArrayList;
 
 
-public class Workshop <T extends Car> {
+public class Workshop <T extends Car> implements hasPosition {
 
     private final int capacity;
     private final Point location;
