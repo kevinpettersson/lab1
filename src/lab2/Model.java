@@ -9,8 +9,7 @@ import java.util.ArrayList;
 
 public class Model {
 
-    ArrayList<Car> cars = CarController.getCars();
-
+    ArrayList<Car> cars = Application.getCars();
     // Calls the gas method for each car once
     void gas(int amount) {
         double gas = ((double) amount) / 100;

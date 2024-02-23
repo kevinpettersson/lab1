@@ -1,11 +1,13 @@
 package lab2;
 
+import lab1.*;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 /**
  * This class represents the full view of the MVC pattern of your car simulator.
@@ -15,12 +17,12 @@ import java.awt.event.ActionListener;
  **/
 
 public class UI extends JFrame{
-
-    public UI (String framename, CarController cc){
+    public UI (String framename){
         initComponents(framename);
         actionListeners();
     }
-    Model frame = new Model();
+    CarController cc;
+    Model model = new Model();
 
     private static final int X = 800;
     private static final int Y = 800;
@@ -28,7 +30,7 @@ public class UI extends JFrame{
     DrawPanel drawPanel = new DrawPanel(X, Y-240);
     JPanel controlPanel = new JPanel();
     JPanel gasPanel = new JPanel();
-    JSpinner gasSpinner = new JSpinner();
+    //JSpinner gasSpinner = new JSpinner();
 
     JLabel gasLabel = new JLabel("Amount of gas");
     JButton gasButton = new JButton("Gas");
@@ -39,7 +41,7 @@ public class UI extends JFrame{
     JButton lowerBedButton = new JButton("Lower Lift Bed");
     JButton startButton = new JButton("Start all cars");
     JButton stopButton = new JButton("Stop all cars");
-
+    JSpinner gasSpinner = new JSpinner();
     int gasAmount = 0;
     public void initComponents(String title) {
 
@@ -78,7 +80,6 @@ public class UI extends JFrame{
         this.add(controlPanel);
         controlPanel.setBackground(Color.CYAN);
 
-
         startButton.setBackground(Color.blue);
         startButton.setForeground(Color.green);
         startButton.setPreferredSize(new Dimension(X/5-15,200));
@@ -101,64 +102,63 @@ public class UI extends JFrame{
         // Make sure the frame exits when "x" is pressed
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
-
     public void actionListeners(){
-            // This actionListener is for the gas button only
-            // TODO: Create more for each component as necessary
+        // This actionListener is for the gas button only
+        // TODO: Create more for each component as necessary
 
-            gasButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    frame.gas(gasAmount);
-                }
-            });
-            brakeButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    frame.brake(gasAmount);
-                }
-            });
+        gasButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                model.gas(gasAmount);
+            }
+        });
+        brakeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                model.brake(gasAmount);
+            }
+        });
 
-            turboOnButton.addActionListener((new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    frame.saabTurboOn();
-                }
-            }));
-            turboOffButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    frame.saabTurboOff();
-                }
-            });
+        turboOnButton.addActionListener((new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                model.saabTurboOn();
+            }
+        }));
+        turboOffButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                model.saabTurboOff();
+            }
+        });
 
-            // START AND STOP-BUTTON
-            startButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    frame.startEngineAll();
-                }
-            });
-            stopButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    frame.stopEngineAll();
-                }
-            });
+        // START AND STOP-BUTTON
+        startButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                model.startEngineAll();
+            }
+        });
+        stopButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                model.stopEngineAll();
+            }
+        });
 
-            // LIFT AND LOWER BED-BUTTON
-            liftBedButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    frame.liftAllBeds();
-                }
-            });
-            lowerBedButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    frame.lowerAllBeds();
-                }
-            });
+        // LIFT AND LOWER BED-BUTTON
+        liftBedButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                model.liftAllBeds();
+            }
+        });
+        lowerBedButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                model.lowerAllBeds();
+            }
+        });
     }
 
 }

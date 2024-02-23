@@ -18,9 +18,7 @@ public class DrawPanel extends JPanel{
     BufferedImage scaniaImage;
     BufferedImage saabImage;
     BufferedImage volvoWorkshopImage;
-
-    ArrayList<Car> cars = CarController.getCars(); //Gets the list of cars from the CarController class.
-
+    ArrayList<Car> cars = Application.getCars();
     // Initializes the panel and reads the images
     public DrawPanel(int x, int y) {
         this.setDoubleBuffered(true);
