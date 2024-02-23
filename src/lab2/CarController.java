@@ -7,6 +7,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.event.ChangeListener;
+
 /*
 * This class represents the Controller part in the MVC pattern.
 * It's responsibilities is to listen to the View and responds in a appropriate manner by
@@ -30,8 +32,10 @@ public class CarController extends JFrame{
             }
         });
     }
-
-
+    void moveit ( int x, int y, Car car) {
+        car.setX(x);
+        car.setY(y);
+    }
     //When the the "behind" vehicle collides with the vehicle in front, the approaching vehicle will "crash" and move
     public void handleCollition(){
         for (int i = 0; i < cars.size()-1; i++) {
@@ -57,9 +61,7 @@ public class CarController extends JFrame{
         }
         return false;
     }
-
     // If the car collides with the workshop then we remove the car from the list and adds the car to the workshop.
-
     public void ifCarCollideWithWorkshop(){
         Volvo240 volvo = new Volvo240();
         for (Car car : cars) {

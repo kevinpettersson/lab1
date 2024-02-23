@@ -7,9 +7,9 @@ import java.util.ArrayList;
 
 
 public class Application {
-
-    CarController cc = new CarController();
-    UI frame;
+    UI ui = new UI("Fast af");
+    CarController cc = new CarController(ui);
+    //UI frame;
     static ArrayList<Car> cars = new ArrayList<>();
 
     public static ArrayList<Car> getCars(){
@@ -40,9 +40,6 @@ public class Application {
         cars.add(saab95);
         cars.add(scania);
 
-        // Start a new view and send a reference of self
-        app.frame = new UI("Vroom Vroom Car go Zoom Zoom");
-
         // Start the timer
         app.timer.start();
     }
@@ -51,19 +48,19 @@ public class Application {
      * */
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-
             for (Car car : cars) {
                 car.move();
                 int x = (int) Math.round(car.getX());
                 int y = (int) Math.round(car.getY());
                 cc.moveit(x, y, car);
                 // repaint() calls the paintComponent method of the panel
-                frame.drawPanel.repaint();
+                ui.drawPanel.repaint();
                 cc.adjustCarPosition(x, y, car);
             }
             cc.ifCarCollideWithWorkshop();
             cc.handleCollition();
-
+            cc.actionListeners();
+            
         }
     }
 

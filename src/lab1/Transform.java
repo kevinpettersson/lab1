@@ -41,14 +41,14 @@ public class Transform {
     }
 
     public void gas(double amount) {
-        if (amount > 0 && amount <= 1) {
+        if (amount >= 0 && amount <= 1000) {
             incrementSpeed(amount);
         } else {
             throw new IllegalArgumentException("Too much gas");
         }
     }
     public void brake(double amount) {
-        if (amount > 0 && amount <= 1) {
+        if (amount >= 0 && amount <= 1000) {
             decrementSpeed(amount);
         } else {
             throw new IllegalArgumentException("Too much brake");
