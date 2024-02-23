@@ -63,6 +63,6 @@ public class DrawPanel extends JPanel{
             }
         }
          // see javadoc for more info on the parameters
-        g.drawImage(volvoWorkshopImage, (int) CarController.volvo240Workshop.getX(), (int) CarController.volvo240Workshop.getY(), null);
+        g.drawImage(volvoWorkshopImage, (int) Application.volvo240Workshop.getX(), (int) Application.volvo240Workshop.getY(), null);
     }
 }

@@ -1,6 +1,7 @@
 package lab2;
 import lab1.*;
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -15,7 +16,6 @@ public class CarController extends JFrame{
     ArrayList<Car> cars = Application.getCars();
 
     void moveit(int x, int y, Car car){
-
         car.setX(x);
         car.setY(y);
     }
@@ -37,7 +37,6 @@ public class CarController extends JFrame{
     }
     //Checks potential collition between two cars. Returns a boolean.
     //Rewritten with a hasPosition interface as typearguments. To generalize the method.
-    /*
 
     public boolean collition(hasPosition objA, hasPosition objB) {
         if (objA.getY() < (objB.getY() + 60) && (objA.getY() > (objB.getY() - 60))){
@@ -48,60 +47,19 @@ public class CarController extends JFrame{
         return false;
     }
 
-     */
-    public boolean collition(Car carA, Car carB) {
-        for (int i = 0; i < cars.size() - 1; i++) {
-            for (int j = i + 1; j < cars.size(); j++) {
-                if (carA.getY() < (carB.getY() + 60) && (carA.getY() > (carB.getY() - 60))) {
-                    if (carA.getX() > (carB.getX() - 100) && (carA.getX() < (carB.getX() + 100))) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-    }
-
-
     // If the car collides with the workshop then we remove the car from the list and adds the car to the workshop.
-    /*
+
     public void ifCarCollideWithWorkshop(){
-        for (Car car : cars){
-            if (car instanceof Volvo240){
-                if (collition(car, volvo240Workshop)) {
-                    cars.remove(car);
-                    volvo240Workshop.leaveVehicle((Volvo240) car);
-                }
+        Volvo240 volvo = new Volvo240();
+        for (Car car : cars) {
+            if (car instanceof Volvo240) {
+                volvo = (Volvo240) car;
             }
         }
         if (collition(volvo, Application.volvo240Workshop)) {
             cars.remove(volvo);
             Application.volvo240Workshop.leaveVehicle(volvo);
             System.out.println("Left 1 vehicle");
-        }
-    }
-
-
-     */
-    // If the car collides with the workshop then we remove the car from the list and adds the car to the workshop.
-    public void ifCarCollideWithWorkshop(){
-        //Workshop<Volvo240> volvoWorkshop = volvo240Workshop;
-        Volvo240 volvo = new Volvo240();
-        for (Car car : cars){
-            if (car instanceof Volvo240){
-                volvo = (Volvo240) car;
-                /*
-                if (collition(car, volvo240Workshop)) {
-                    cars.remove(car);
-                    volvo240Workshop.leaveVehicle((Volvo240) car);
-                }
-
-                 */
-            }
-        }
-        if ((int) volvo.getY() >= (int) volvo240Workshop.getY() && volvo.getX() >= volvo240Workshop.getX()) {
-            cars.remove(volvo);
-            volvo240Workshop.leaveVehicle(volvo);
         }
     }
 
