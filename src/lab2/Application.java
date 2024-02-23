@@ -24,7 +24,7 @@ public class Application {
     static Workshop<Volvo240> volvo240Workshop = new Workshop<>(10, new Point(300,200));
     public static void main(String[] args) {
         // Instance of this class
-        CarController cc = new CarController();
+        //CarController cc = new CarController(new UI("BrumBrum"));
         Application app = new Application();
         Volvo240 volvo240 = new Volvo240();
         Saab95 saab95 = new Saab95();

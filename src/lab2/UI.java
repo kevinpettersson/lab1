@@ -19,10 +19,7 @@ import java.util.ArrayList;
 public class UI extends JFrame{
     public UI (String framename){
         initComponents(framename);
-        actionListeners();
     }
-    CarController cc;
-    Model model = new Model();
 
     private static final int X = 800;
     private static final int Y = 800;
@@ -30,7 +27,7 @@ public class UI extends JFrame{
     DrawPanel drawPanel = new DrawPanel(X, Y-240);
     JPanel controlPanel = new JPanel();
     JPanel gasPanel = new JPanel();
-    //JSpinner gasSpinner = new JSpinner();
+    JSpinner gasSpinner = new JSpinner();
 
     JLabel gasLabel = new JLabel("Amount of gas");
     JButton gasButton = new JButton("Gas");
@@ -41,15 +38,15 @@ public class UI extends JFrame{
     JButton lowerBedButton = new JButton("Lower Lift Bed");
     JButton startButton = new JButton("Start all cars");
     JButton stopButton = new JButton("Stop all cars");
-    JSpinner gasSpinner = new JSpinner();
-    int gasAmount = 0;
+    //gasSpinner = new JSpinner();
+    //int gasAmount = 0;
     public void initComponents(String title) {
 
         this.setTitle(title);
         this.setPreferredSize(new Dimension(X,Y));
         this.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
         this.add(drawPanel);
-
+/*
         SpinnerModel spinnerModel =
                 new SpinnerNumberModel(0, //initial value
                         0, //min
@@ -61,6 +58,8 @@ public class UI extends JFrame{
                 gasAmount = (int) ((JSpinner)e.getSource()).getValue();
             }
         });
+
+ */
 
         gasPanel.setLayout(new BorderLayout());
         gasPanel.add(gasLabel, BorderLayout.PAGE_START);
@@ -102,63 +101,6 @@ public class UI extends JFrame{
         // Make sure the frame exits when "x" is pressed
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
-    public void actionListeners(){
-        // This actionListener is for the gas button only
-        // TODO: Create more for each component as necessary
 
-        gasButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                model.gas(gasAmount);
-            }
-        });
-        brakeButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                model.brake(gasAmount);
-            }
-        });
-
-        turboOnButton.addActionListener((new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                model.saabTurboOn();
-            }
-        }));
-        turboOffButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                model.saabTurboOff();
-            }
-        });
-
-        // START AND STOP-BUTTON
-        startButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                model.startEngineAll();
-            }
-        });
-        stopButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                model.stopEngineAll();
-            }
-        });
-
-        // LIFT AND LOWER BED-BUTTON
-        liftBedButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                model.liftAllBeds();
-            }
-        });
-        lowerBedButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                model.lowerAllBeds();
-            }
-        });
-    }
 
 }

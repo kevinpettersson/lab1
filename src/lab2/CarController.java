@@ -1,5 +1,6 @@
 package lab2;
 import lab1.*;
+
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import java.awt.event.ActionEvent;
@@ -13,11 +14,21 @@ import java.util.ArrayList;
  */
 
 public class CarController extends JFrame{
+    UI ui;
+    Model model = new Model();
     ArrayList<Car> cars = Application.getCars();
-
-    void moveit(int x, int y, Car car){
-        car.setX(x);
-        car.setY(y);
+    int gasAmount = 0;
+    JSpinner gasSpinner;
+    public CarController(UI ui) {
+        this.ui = ui;
+        //gasAmount = gasAmount;
+        SpinnerModel spinnerModel = new SpinnerNumberModel(0, 0, 100, 1);
+        gasSpinner = new JSpinner(spinnerModel);
+        gasSpinner.addChangeListener(new ChangeListener() {
+            public void stateChanged(ChangeEvent e) {
+                gasAmount = (int) ((JSpinner) e.getSource()).getValue();
+            }
+        });
     }
 
 
@@ -80,7 +91,65 @@ public class CarController extends JFrame{
             car.setX(cX <= 0 ? 2 : 700 - 2);
         }
     }
+    public void actionListeners(){
+        // This actionListener is for the gas button only
+        // TODO: Create more for each component as necessary
 
+        ui.gasButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                model.gas(gasAmount);
+                System.out.println("JAG GASAR KEVIN SLUTA SPAMMA");
+            }
+        });
+        ui.brakeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                model.brake(gasAmount);
+            }
+        });
+
+        ui.turboOnButton.addActionListener((new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                model.saabTurboOn();
+            }
+        }));
+        ui.turboOffButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                model.saabTurboOff();
+            }
+        });
+
+        // START AND STOP-BUTTON
+        ui.startButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                model.startEngineAll();
+            }
+        });
+        ui.stopButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                model.stopEngineAll();
+            }
+        });
+
+        // LIFT AND LOWER BED-BUTTON
+        ui.liftBedButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                model.liftAllBeds();
+            }
+        });
+        ui.lowerBedButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                model.lowerAllBeds();
+            }
+        });
+    }
 
 }
 
