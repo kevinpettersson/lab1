@@ -17,29 +17,46 @@ import java.util.ArrayList;
  **/
 
 public class UI extends JFrame{
-    public UI (String framename){
+    private Model model;
+    private DrawPanel drawPanel;
+    private JPanel controlPanel;
+    private JPanel gasPanel;
+    JSpinner gasSpinner;
+    JLabel gasLabel;
+    JButton gasButton;
+    JButton brakeButton;
+    JButton turboOnButton;
+    JButton turboOffButton;
+    JButton liftBedButton;
+    JButton lowerBedButton;
+    JButton startButton;
+    JButton stopButton;
+
+    private final int X = 800;
+    private final int Y = 800;
+
+    public UI (String framename, Model model){
+        this.model = model;
+        this.drawPanel = new DrawPanel(X, Y-240, this.model);
+        this.controlPanel = new JPanel();
+        this.gasPanel = new JPanel();
+        this.gasSpinner = new JSpinner();
+        this.gasLabel = new JLabel("Amount of gas");
+        this.gasButton = new JButton("Gas");
+        this.brakeButton = new JButton("Brake");
+        this.turboOnButton = new JButton("Saab Turbo on");
+        this.turboOffButton = new JButton("Saab Turbo off");
+        this.liftBedButton = new JButton("Scania Lift Bed");
+        this.lowerBedButton = new JButton("Lower Lift Bed");
+        this.startButton = new JButton("Start all cars");
+        this.stopButton = new JButton("Stop all cars");
         initComponents(framename);
     }
 
-    private static final int X = 800;
-    private static final int Y = 800;
+    public DrawPanel getDrawPanel(){
+        return this.drawPanel;
+    }
 
-    DrawPanel drawPanel = new DrawPanel(X, Y-240);
-    JPanel controlPanel = new JPanel();
-    JPanel gasPanel = new JPanel();
-    JSpinner gasSpinner = new JSpinner();
-
-    JLabel gasLabel = new JLabel("Amount of gas");
-    JButton gasButton = new JButton("Gas");
-    JButton brakeButton = new JButton("Brake");
-    JButton turboOnButton = new JButton("Saab Turbo on");
-    JButton turboOffButton = new JButton("Saab Turbo off");
-    JButton liftBedButton = new JButton("Scania Lift Bed");
-    JButton lowerBedButton = new JButton("Lower Lift Bed");
-    JButton startButton = new JButton("Start all cars");
-    JButton stopButton = new JButton("Stop all cars");
-    //gasSpinner = new JSpinner();
-    //int gasAmount = 0;
     public void initComponents(String title) {
 
         this.setTitle(title);
@@ -61,9 +78,9 @@ public class UI extends JFrame{
 
  */
 
-        gasPanel.setLayout(new BorderLayout());
-        gasPanel.add(gasLabel, BorderLayout.PAGE_START);
-        gasPanel.add(gasSpinner, BorderLayout.PAGE_END);
+        this.gasPanel.setLayout(new BorderLayout());
+        this.gasPanel.add(gasLabel, BorderLayout.PAGE_START);
+        this.gasPanel.add(gasSpinner, BorderLayout.PAGE_END);
 
         this.add(gasPanel);
 

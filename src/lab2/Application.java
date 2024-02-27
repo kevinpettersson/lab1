@@ -7,42 +7,37 @@ import java.util.ArrayList;
 
 
 public class Application {
-    UI ui = new UI("Fast af");
-    CarController cc = new CarController(ui);
-    //UI frame;
-    static ArrayList<Car> cars = new ArrayList<>();
 
-    public static ArrayList<Car> getCars(){
-        return cars;
-    }
-    // The delay (ms) corresponds to 20 updates a sec (hz)
-    private final int delay = 50;
-    // The timer is started with a listener (see below) that executes the statements
+    private final CarController cc;
+    private final  UI ui;
+    private final Model model;
+    private ArrayList<Car> cars;
     // each step between delays.
-    private Timer timer = new Timer(delay, new TimerListener());
+    private final int delay;
+    // The timer is started with a listener (see below) that executes the statements
+    private final Timer timer;
+    public Application(){
+        this.model = new Model();
+        this.ui = new UI("Fast af", model);
+        this.cc = new CarController(ui, model);
+        this.cars = model.getCars();
+        // The delay (ms) corresponds to 20 updates a sec (hz)
+        this.delay = 50;
+        this.timer = new Timer(delay, new TimerListener());
 
-    static Workshop<Volvo240> volvo240Workshop = new Workshop<>(10, new Point(300,200));
+    }
+
     public static void main(String[] args) {
         // Instance of this class
-        //CarController cc = new CarController(new UI("BrumBrum"));
         Application app = new Application();
-        Volvo240 volvo240 = new Volvo240();
-        Saab95 saab95 = new Saab95();
-        Scania scania = new Scania();
-        volvo240.setPos(0,200);
-        saab95.setPos(0,0);
-        scania.setPos(0,100);
-        volvo240.setDirection(Direction.EAST);
-        saab95.setDirection(Direction.EAST);
-        scania.setDirection(Direction.EAST);
 
-        cars.add(volvo240);
-        cars.add(saab95);
-        cars.add(scania);
+        // Start the action listeners.
+        app.cc.actionListeners();
 
         // Start the timer
         app.timer.start();
     }
+
     /* Each step the TimerListener moves all the cars in the list and tells the
      * view to update its images. Change this method to your needs.
      * */
@@ -52,15 +47,14 @@ public class Application {
                 car.move();
                 int x = (int) Math.round(car.getX());
                 int y = (int) Math.round(car.getY());
-                cc.moveit(x, y, car);
+                model.moveit(x, y, car);
                 // repaint() calls the paintComponent method of the panel
-                ui.drawPanel.repaint();
-                cc.adjustCarPosition(x, y, car);
+                ui.getDrawPanel().repaint();
+                model.adjustCarPosition(x, y, car);
             }
-            cc.ifCarCollideWithWorkshop();
-            cc.handleCollition();
-            cc.actionListeners();
-            
+            model.ifCarCollideWithWorkshop();
+            model.handleCollition();
+
         }
     }
 

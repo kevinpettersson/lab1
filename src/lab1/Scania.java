@@ -10,11 +10,9 @@ public class Scania extends Car implements iTruckBed {
         this.tb = new TruckBed();
     }
 
-
     public void setTruckBedAngle(int degree) {
         tb.setTruckBedAngle(degree, this);
     }
-
 
     public int getTruckBedAngle() {
         return tb.truckBedAngle;

@@ -111,8 +111,6 @@ public class Transform {
         this.currentSpeed = 0;
     }
 
-
-
     // Getters
     public double getEnginepower(){
         return this.enginepower;

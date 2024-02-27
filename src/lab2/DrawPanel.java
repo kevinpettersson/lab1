@@ -14,11 +14,12 @@ import javax.swing.*;
 
 public class DrawPanel extends JPanel{
     // Just a single image
-    BufferedImage volvoImage;
-    BufferedImage scaniaImage;
-    BufferedImage saabImage;
-    BufferedImage volvoWorkshopImage;
-    ArrayList<Car> cars = Application.getCars();
+    private BufferedImage volvoImage;
+    private BufferedImage scaniaImage;
+    private BufferedImage saabImage;
+    private BufferedImage volvoWorkshopImage;
+    private final Model model;
+
     // Initializes the panel and reads the images
     public DrawPanel(int x, int y) {
         this.setDoubleBuffered(true);
@@ -43,9 +44,8 @@ public class DrawPanel extends JPanel{
     }
 
     // This method is called each time the panel updates/refreshes/repaints itself
-    // TODO: Change to suit your needs.
     @Override
-    protected void paintComponent(Graphics g) {
+    public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
         for (Car car : cars) {
@@ -63,6 +63,6 @@ public class DrawPanel extends JPanel{
             }
         }
          // see javadoc for more info on the parameters
-        g.drawImage(volvoWorkshopImage, (int) Application.volvo240Workshop.getX(), (int) Application.volvo240Workshop.getY(), null);
+        g.drawImage(volvoWorkshopImage, (int) model.getWorkshop().getX(), (int) model.getWorkshop().getY(), null);
     }
 }
