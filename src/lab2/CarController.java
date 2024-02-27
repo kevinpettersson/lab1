@@ -34,7 +34,6 @@ public class CarController {
             @Override
             public void actionPerformed(ActionEvent e) {
                 model.gas(gasAmount);
-                System.out.println("JAG GASAR KEVIN SLUTA SPAMMA");
             }
         });
         ui.brakeButton.addActionListener(new ActionListener() {

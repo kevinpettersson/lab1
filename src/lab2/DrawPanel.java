@@ -21,7 +21,8 @@ public class DrawPanel extends JPanel{
     private final Model model;
 
     // Initializes the panel and reads the images
-    public DrawPanel(int x, int y) {
+    public DrawPanel(int x, int y, Model model) {
+        this.model = model;
         this.setDoubleBuffered(true);
         this.setPreferredSize(new Dimension(x, y));
         this.setBackground(Color.green);
@@ -48,7 +49,7 @@ public class DrawPanel extends JPanel{
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        for (Car car : cars) {
+        for (Car car : model.getCars()) {
             if (car instanceof Volvo240) {
                 g.drawImage(volvoImage, (int) Math.round(car.getX()), (int) Math.round(car.getY()), null);
             }
