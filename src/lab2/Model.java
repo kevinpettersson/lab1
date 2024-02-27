@@ -4,7 +4,7 @@ import lab1.*;
 import java.util.ArrayList;
 
 public class Model {
-    private ArrayList<Car> cars;
+    public ArrayList<Car> cars;
     private final Workshop<Volvo240> volvo240Workshop;
 
     public Model() {
@@ -136,7 +136,6 @@ public class Model {
         if (collition(volvo, volvo240Workshop)) {
             cars.remove(volvo);
             volvo240Workshop.leaveVehicle(volvo);
-            System.out.println("Left 1 vehicle");
         }
     }
 

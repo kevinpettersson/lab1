@@ -19,6 +19,7 @@ public class DrawPanel extends JPanel{
     private BufferedImage saabImage;
     private BufferedImage volvoWorkshopImage;
     private final Model model;
+    private ArrayList<Car> cars;
 
     // Initializes the panel and reads the images
     public DrawPanel(int x, int y, Model model) {
@@ -26,6 +27,19 @@ public class DrawPanel extends JPanel{
         this.setDoubleBuffered(true);
         this.setPreferredSize(new Dimension(x, y));
         this.setBackground(Color.green);
+        this.cars = model.getCars();
+
+
+        /*
+        Otto leker rundor lite med detta, så pls dont move
+        try {
+            this.setBackground(ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Background.png")));
+        } catch (IOException ex)
+        {
+            ex.printStackTrace();
+        }
+        */
+
         // Print an error message in case file is not found with a try/catch block
         try {
             // You can remove the "pics" part if running outside of IntelliJ and
@@ -34,14 +48,86 @@ public class DrawPanel extends JPanel{
 
             // Rememember to rightclick src New -> Package -> name: pics -> MOVE *.jpg to pics.
             // if you are starting in IntelliJ.
+            /*
             saabImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Saab95.jpg"));
             scaniaImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Scania.jpg"));
             volvoImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Volvo240.jpg"));
+            */
+
             volvoWorkshopImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/VolvoBrand.jpg"));
         } catch (IOException ex)
         {
             ex.printStackTrace();
         }
+    }
+    //Implementing the right images
+    public BufferedImage getSaabImage(Car saab95) {
+        try {
+        switch (cars.get(cars.indexOf(saab95)).getDirection()) {
+            case NORTH:
+                saabImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Saab95.jpg"));
+                break;
+            case EAST:
+                saabImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Saab95_East.png"));
+                break;
+            case SOUTH:
+                saabImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Saab95.jpg"));
+                break;
+            case WEST:
+                saabImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Saab95_West.png"));
+                break;
+        }
+        } catch (IOException ex)
+        {
+            ex.printStackTrace();
+        }
+        return saabImage;
+    }
+
+    public BufferedImage getVolvoImage(Car volvo240) {
+        try {
+            switch (cars.get(cars.indexOf(volvo240)).getDirection()) {
+                case NORTH:
+                    volvoImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Volvo240.jpg"));
+                    break;
+                case EAST:
+                    volvoImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Volvo_East.png"));
+                    break;
+                case SOUTH:
+                    volvoImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Volvo240.jpg"));
+                    break;
+                case WEST:
+                    volvoImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Volvo_West.png"));
+                    break;
+            }
+        } catch (IOException ex)
+        {
+            ex.printStackTrace();
+        }
+        return volvoImage;
+    }
+
+    public BufferedImage getScaniaImage(Car scania) {
+        try {
+            switch (cars.get(cars.indexOf(scania)).getDirection()) {
+                case NORTH:
+                    scaniaImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Scania.jpg"));
+                    break;
+                case EAST:
+                    scaniaImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Scania_East.png"));
+                    break;
+                case SOUTH:
+                    scaniaImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Scania.jpg"));
+                    break;
+                case WEST:
+                    scaniaImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Scania_West.png"));
+                    break;
+            }
+        } catch (IOException ex)
+        {
+            ex.printStackTrace();
+        }
+        return scaniaImage;
     }
 
     // This method is called each time the panel updates/refreshes/repaints itself
@@ -51,16 +137,16 @@ public class DrawPanel extends JPanel{
 
         for (Car car : model.getCars()) {
             if (car instanceof Volvo240) {
-                g.drawImage(volvoImage, (int) Math.round(car.getX()), (int) Math.round(car.getY()), null);
+                g.drawImage(getVolvoImage(car), (int) Math.round(car.getX()), (int) Math.round(car.getY()), null);
             }
             if (car instanceof Saab95) {
-                g.drawImage(saabImage, (int) Math.round(car.getX()), (int) Math.round(car.getY()), null);
+                g.drawImage(getSaabImage(car), (int) Math.round(car.getX()), (int) Math.round(car.getY()), null);
             }
             if (car instanceof Scania) {
-                g.drawImage(scaniaImage, (int) Math.round(car.getX()), (int) Math.round(car.getY()), null);
+                g.drawImage(getScaniaImage(car), (int) Math.round(car.getX()), (int) Math.round(car.getY()), null);
             }
             if (car instanceof CarTransport){
-                g.drawImage(scaniaImage, (int) Math.round(car.getX()), (int) Math.round(car.getY()), null);
+                g.drawImage(getScaniaImage(car), (int) Math.round(car.getX()), (int) Math.round(car.getY()), null);
             }
         }
          // see javadoc for more info on the parameters
