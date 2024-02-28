@@ -49,6 +49,7 @@ public class Model {
         if(cars.size() + 1 <= 10){
             int index = rand.nextInt(0, cars1.length);
             cars.add(cars1[index]);
+            cars1[index].setDirection(Direction.EAST);
         }
     }
     public void removeCar() {
