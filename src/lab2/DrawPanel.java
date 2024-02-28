@@ -90,7 +90,7 @@ public class DrawPanel extends JPanel{
         }
         return volvoImage;
     }
-
+    //
     public BufferedImage getScaniaImage(Car scania) {
         try {
             switch (cars.get(cars.indexOf(scania)).getDirection()) {
