@@ -47,7 +47,6 @@ public class UI extends JFrame{
         this.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
         this.add(drawPanel);
 
-
         this.gasPanel.setLayout(new BorderLayout());
         this.gasPanel.add(buttons.getGasLabel(), BorderLayout.PAGE_START);
         this.gasPanel.add(gasSpinner, BorderLayout.PAGE_END);
@@ -74,10 +73,10 @@ public class UI extends JFrame{
         buttons.getStartButton().setPreferredSize(new Dimension(X/5-15,200));
         this.add(buttons.getStartButton());
 
-        stopButton.setBackground(Color.red);
-        stopButton.setForeground(Color.black);
-        stopButton.setPreferredSize(new Dimension(X/5-15,200));
-        this.add(stopButton);
+        buttons.getStopButton().setBackground(Color.red);
+        buttons.getStopButton().setForeground(Color.black);
+        buttons.getStopButton().setPreferredSize(new Dimension(X/5-15,200));
+        this.add(buttons.getStopButton());
 
         // Make the frame pack all it's components by respecting the sizes if possible.
         this.pack();

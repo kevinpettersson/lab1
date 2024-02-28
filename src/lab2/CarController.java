@@ -1,5 +1,7 @@
 package lab2;
 
+import lab1.Car;
+
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import java.awt.event.ActionEvent;
