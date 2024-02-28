@@ -49,12 +49,13 @@ public class Application {
                 int x = (int) Math.round(car.getX());
                 int y = (int) Math.round(car.getY());
                 model.moveit(x, y, car);
-                // repaint() calls the paintComponent method of the panel
-                ui.getDrawPanel().repaint();
+
                 model.adjustCarPosition(x, y, car);
             }
             model.ifCarCollideWithWorkshop();
             model.handleCollition();
+            // repaint() calls the paintComponent method of the panel
+            ui.getDrawPanel().repaint();
 
         }
     }

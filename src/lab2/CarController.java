@@ -1,5 +1,7 @@
 package lab2;
 
+import lab1.Car;
+
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import java.awt.event.ActionEvent;
@@ -15,11 +17,13 @@ import javax.swing.event.ChangeListener;
 public class CarController {
     private UI ui;
     private Model model;
+    private Buttons buttons;
     private int gasAmount;
 
     public CarController(UI ui, Model model) {
         this.model = model;
         this.ui = ui;
+        this.buttons = ui.getButtons();
         this.gasAmount = 0;
     }
 
@@ -30,26 +34,38 @@ public class CarController {
                 gasAmount = (int) ((JSpinner) e.getSource()).getValue();
             }
         });
-        ui.gasButton.addActionListener(new ActionListener() {
+        buttons.getAddCar().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                model.addCar();
+            }
+        });
+        buttons.getRemoveCar().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                model.removeCar();
+            }
+        });
+        buttons.getGasButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 model.gas(gasAmount);
             }
         });
-        ui.brakeButton.addActionListener(new ActionListener() {
+        buttons.getBrakeButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 model.brake(gasAmount);
             }
         });
 
-        ui.turboOnButton.addActionListener((new ActionListener() {
+        buttons.getTurboOnButton().addActionListener((new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 model.saabTurboOn();
             }
         }));
-        ui.turboOffButton.addActionListener(new ActionListener() {
+        buttons.getTurboOffButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 model.saabTurboOff();
@@ -57,13 +73,13 @@ public class CarController {
         });
 
         // START AND STOP-BUTTON
-        ui.startButton.addActionListener(new ActionListener() {
+        buttons.getStartButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 model.startEngineAll();
             }
         });
-        ui.stopButton.addActionListener(new ActionListener() {
+        buttons.getStopButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 model.stopEngineAll();
@@ -71,13 +87,13 @@ public class CarController {
         });
 
         // LIFT AND LOWER BED-BUTTON
-        ui.liftBedButton.addActionListener(new ActionListener() {
+        buttons.getLiftBedButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 model.liftAllBeds();
             }
         });
-        ui.lowerBedButton.addActionListener(new ActionListener() {
+        buttons.getLowerBedButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 model.lowerAllBeds();
