@@ -2,6 +2,7 @@ package lab2;
 
 import lab1.*;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Model {
     public ArrayList<Car> cars;
@@ -41,6 +42,21 @@ public class Model {
         saab95.setDirection(Direction.EAST);
         scania.setDirection(Direction.EAST);
     }
+    public void addCar(){
+        Random rand = new Random();
+        Car[] cars1 = {new Volvo240(), new Saab95(), new Scania()};
+
+        if(cars.size() + 1 <= 10){
+            int index = rand.nextInt(0, cars1.length);
+            cars.add(cars1[index]);
+        }
+    }
+    public void removeCar() {
+        if (!cars.isEmpty()) {
+            cars.remove(0); 
+        }
+    }
+
     public void gas(int amount) {
         double gas = ((double) amount) / 100;
         for (Car car : cars){

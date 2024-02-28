@@ -17,42 +17,26 @@ import java.util.ArrayList;
  **/
 
 public class UI extends JFrame{
-    private Model model;
-    private DrawPanel drawPanel;
-    private JPanel controlPanel;
-    private JPanel gasPanel;
-    JSpinner gasSpinner;
-    JLabel gasLabel;
-    JButton gasButton;
-    JButton brakeButton;
-    JButton turboOnButton;
-    JButton turboOffButton;
-    JButton liftBedButton;
-    JButton lowerBedButton;
-    JButton startButton;
-    JButton stopButton;
+    private final DrawPanel drawPanel;
+    private final JPanel controlPanel;
+    private final JPanel gasPanel;
+    private final Buttons buttons;
+    protected JSpinner gasSpinner;
 
     private final int X = 800;
     private final int Y = 800;
 
     public UI (String framename, Model model){
-        this.model = model;
-        this.drawPanel = new DrawPanel(X, Y-240, this.model);
+        this.drawPanel = new DrawPanel(X, Y-240, model);
         this.controlPanel = new JPanel();
         this.gasPanel = new JPanel();
         this.gasSpinner = new JSpinner();
-        this.gasLabel = new JLabel("Amount of gas");
-        this.gasButton = new JButton("Gas");
-        this.brakeButton = new JButton("Brake");
-        this.turboOnButton = new JButton("Saab Turbo on");
-        this.turboOffButton = new JButton("Saab Turbo off");
-        this.liftBedButton = new JButton("Scania Lift Bed");
-        this.lowerBedButton = new JButton("Lower Lift Bed");
-        this.startButton = new JButton("Start all cars");
-        this.stopButton = new JButton("Stop all cars");
+        this.buttons = new Buttons();
         initComponents(framename);
     }
-
+    public Buttons getButtons(){
+        return this.buttons;
+    }
     public DrawPanel getDrawPanel(){
         return this.drawPanel;
     }
@@ -65,27 +49,30 @@ public class UI extends JFrame{
 
 
         this.gasPanel.setLayout(new BorderLayout());
-        this.gasPanel.add(gasLabel, BorderLayout.PAGE_START);
+        this.gasPanel.add(buttons.getGasLabel(), BorderLayout.PAGE_START);
         this.gasPanel.add(gasSpinner, BorderLayout.PAGE_END);
 
         this.add(gasPanel);
 
         controlPanel.setLayout(new GridLayout(2,4));
-
-        controlPanel.add(gasButton, 0);
-        controlPanel.add(turboOnButton, 1);
-        controlPanel.add(liftBedButton, 2);
-        controlPanel.add(brakeButton, 3);
+        controlPanel.add(buttons.getGasButton(), 0);
+        controlPanel.add(buttons.getTurboOnButton(),1);
+        controlPanel.add(buttons.getLiftBedButton(), 2);
+        controlPanel.add(buttons.getBrakeButton(), 3);
+        JButton turboOffButton = buttons.getTurboOffButton();
+        turboOffButton.setFont(new Font("Arial", Font.PLAIN, 12)); // Så texten rymms inom panelen.
         controlPanel.add(turboOffButton, 4);
-        controlPanel.add(lowerBedButton, 5);
-        controlPanel.setPreferredSize(new Dimension((X/2)+4, 200));
+        controlPanel.add(buttons.getLowerBedButton(), 5);
+        controlPanel.add(buttons.getAddCar(), 6);
+        controlPanel.add(buttons.getRemoveCar(), 7);
+        controlPanel.setPreferredSize(new Dimension(X/2, 200));
         this.add(controlPanel);
         controlPanel.setBackground(Color.CYAN);
 
-        startButton.setBackground(Color.blue);
-        startButton.setForeground(Color.green);
-        startButton.setPreferredSize(new Dimension(X/5-15,200));
-        this.add(startButton);
+        buttons.getStartButton().setBackground(Color.blue);
+        buttons.getStartButton().setForeground(Color.green);
+        buttons.getStartButton().setPreferredSize(new Dimension(X/5-15,200));
+        this.add(buttons.getStartButton());
 
         stopButton.setBackground(Color.red);
         stopButton.setForeground(Color.black);
