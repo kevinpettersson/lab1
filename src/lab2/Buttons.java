@@ -50,11 +50,9 @@ public class Buttons {
     public JButton getTurboOffButton(){
         return this.turboOffButton;
     }
-
     public JButton getStopButton(){
         return this.stopButton;
     }
-
     public JButton getStartButton(){
         return this.startButton;
     }

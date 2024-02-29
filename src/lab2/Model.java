@@ -4,52 +4,73 @@ import lab1.*;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Model {
+public class Model implements Observer {
     public ArrayList<Car> cars;
     private final Workshop<Volvo240> volvo240Workshop;
+    private final CarFactory carFactory;
 
     public Model() {
         this.cars = new ArrayList<Car>();
-        this.volvo240Workshop = new Workshop<Volvo240>(10, new Point(300,200));
+        this.volvo240Workshop = new Workshop<Volvo240>(10, new Point(300,300));
+        this.carFactory = new CarFactory();
         initiateCars(cars);
     }
 
     public Workshop<Volvo240> getWorkshop(){
         return this.volvo240Workshop;
     }
+
+    public void update(int x, int gasAmount) {
+        switch(x){
+            case 1:
+                addCar();
+                break;
+            case 2:
+                removeCar();
+                break;
+            case 3:
+                gas(gasAmount);
+                break;
+            case 4:
+                brake(gasAmount);
+                break;
+            case 5:
+                saabTurboOn();
+                break;
+            case 6:
+                saabTurboOff();
+                break;
+            case 7:
+                startEngineAll();
+                break;
+            case 8:
+                stopEngineAll();
+                break;
+            case 9:
+                liftAllBeds();
+                break;
+            case 10:
+                lowerAllBeds();
+                break;
+        }
+    }
+
     public ArrayList<Car> getCars(){
         return this.cars;
     }
 
     public void initiateCars(ArrayList<Car> cars){
-        // Create cart objects.
-        Saab95 saab95 = new Saab95();
-        Volvo240 volvo240 = new Volvo240();
-        Scania scania = new Scania();
-
-        // Adds to list.
-        cars.add(volvo240);
-        cars.add(saab95);
-        cars.add(scania);
-
-        // Set position
-        volvo240.setPos(0,200);
-        saab95.setPos(0,0);
-        scania.setPos(0,100);
-
-        // Sets direction
-        volvo240.setDirection(Direction.EAST);
-        saab95.setDirection(Direction.EAST);
-        scania.setDirection(Direction.EAST);
+        cars.add(carFactory.createCar(new Saab95(),0,100 ));
+        cars.add(carFactory.createCar(new Scania(), 0, 200));
+        cars.add(carFactory.createCar(new Volvo240(), 0, 300));
     }
     public void addCar(){
         Random rand = new Random();
         Car[] cars1 = {new Volvo240(), new Saab95(), new Scania()};
 
-        if(cars.size() + 1 <= 10){
+        if (cars.size() + 1 <= 10){
             int index = rand.nextInt(0, cars1.length);
-            cars.add(cars1[index]);
-            cars1[index].setDirection(Direction.EAST);
+            cars.add(carFactory.createCar(cars1[index], 0, 0));
         }
     }
     public void removeCar() {

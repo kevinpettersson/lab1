@@ -3,7 +3,6 @@ import lab1.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 
@@ -15,8 +14,9 @@ public class Application {
     private ArrayList<Car> cars;
     // each step between delays.
     private final int delay;
-    // The timer is started with a listener (see below) that executes the statements
     private final Timer timer;
+
+
     public Application(){
         this.model = new Model();
         this.ui = new UI("Fast af", model);
@@ -24,13 +24,14 @@ public class Application {
         this.cars = model.getCars();
         // The delay (ms) corresponds to 20 updates a sec (hz)
         this.delay = 50;
+        // The timer is started with a listener (see below) that executes the statements
         this.timer = new Timer(delay, new TimerListener());
-
     }
 
     public static void main(String[] args) {
         // Instance of this class
         Application app = new Application();
+        app.cc.obs.add(app.model);
 
         // Start the action listeners.
         app.cc.actionListeners();
