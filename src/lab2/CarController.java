@@ -6,6 +6,7 @@ import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.event.ChangeListener;
 
 /*
@@ -19,12 +20,14 @@ public class CarController implements Observerables{
     private Model model;
     private Buttons buttons;
     private int gasAmount;
+    ArrayList<Observer> obs;
 
     public CarController(UI ui, Model model) {
         this.model = model;
         this.ui = ui;
         this.buttons = ui.getButtons();
         this.gasAmount = 0;
+        this.obs = new ArrayList<>();
     }
 
     public void notifyOb(int x, int gasAmount) {
@@ -48,8 +51,7 @@ public class CarController implements Observerables{
         });
         buttons.getAddCar().addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                model.addCar();
+            public void actionPerformed(ActionEvent e) {notifyOb(1,0);
             }
         });
         buttons.getRemoveCar().addActionListener(new ActionListener() {

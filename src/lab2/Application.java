@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 
-public class Application {
+public class Application{
 
     private final CarController cc;
     private final  UI ui;

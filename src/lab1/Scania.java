@@ -13,7 +13,6 @@ public class Scania extends Car implements iTruckBed {
     public void setTruckBedAngle(int degree) {
         tb.setTruckBedAngle(degree, this);
     }
-
     public int getTruckBedAngle() {
         return tb.truckBedAngle;
     }
