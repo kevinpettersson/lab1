@@ -20,37 +20,16 @@ public class Model implements Observer {
         return this.volvo240Workshop;
     }
 
-    public void update(int x, int gasAmount) {
+    public void update(int x) {
         switch(x){
             case 1:
-                addCar();
+                adjustCarPosition();
                 break;
             case 2:
-                removeCar();
+                ifCarCollideWithWorkshop();
                 break;
             case 3:
-                gas(gasAmount);
-                break;
-            case 4:
-                brake(gasAmount);
-                break;
-            case 5:
-                saabTurboOn();
-                break;
-            case 6:
-                saabTurboOff();
-                break;
-            case 7:
-                startEngineAll();
-                break;
-            case 8:
-                stopEngineAll();
-                break;
-            case 9:
-                liftAllBeds();
-                break;
-            case 10:
-                lowerAllBeds();
+                handleCollition();
                 break;
         }
     }
@@ -179,19 +158,23 @@ public class Model implements Observer {
 
     // Checks so the car is within bounds of the frame. If not we stop the car, turn it 180 degress.
     // Sets a new position that is within bounds.
-    public void adjustCarPosition(int cX, int cY, Car car) {
-        if (cY <= -1 || cY >= 501) {
-            car.stopEngine();
-            car.turnLeft();
-            car.turnLeft();
-            car.setY(cY >= 500 ? 500 - 2 : 2);
-        }
+    public void adjustCarPosition() {
+        for (Car car : cars) {
+            int cX = (int) Math.round(car.getX());
+            int cY = (int) Math.round(car.getY());
+            if (cY <= -1 || cY >= 501) {
+                car.stopEngine();
+                car.turnLeft();
+                car.turnLeft();
+                car.setY(cY >= 500 ? 500 - 2 : 2);
+            }
 
-        if (cX <= -1 || cX >= 701) {
-            car.stopEngine();
-            car.turnLeft();
-            car.turnLeft();
-            car.setX(cX <= 0 ? 2 : 700 - 2);
+            if (cX <= -1 || cX >= 701) {
+                car.stopEngine();
+                car.turnLeft();
+                car.turnLeft();
+                car.setX(cX <= 0 ? 2 : 700 - 2);
+            }
         }
     }
 }

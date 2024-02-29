@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 
-public class Application{
+public class Application implements Observerables{
 
     private final CarController cc;
     private final  UI ui;
@@ -15,6 +15,7 @@ public class Application{
     // each step between delays.
     private final int delay;
     private final Timer timer;
+    ArrayList<Observer> obs;
 
 
     public Application(){
@@ -26,12 +27,13 @@ public class Application{
         this.delay = 50;
         // The timer is started with a listener (see below) that executes the statements
         this.timer = new Timer(delay, new TimerListener());
+        this.obs = new ArrayList<>();
     }
 
     public static void main(String[] args) {
         // Instance of this class
         Application app = new Application();
-        app.cc.obs.add(app.model);
+        app.obs.add(app.model);
 
         // Start the action listeners.
         app.cc.actionListeners();
@@ -47,17 +49,26 @@ public class Application{
         public void actionPerformed(ActionEvent e) {
             for (Car car : cars) {
                 car.move();
-                int x = (int) Math.round(car.getX());
-                int y = (int) Math.round(car.getY());
-                model.moveit(x, y, car);
-
-                model.adjustCarPosition(x, y, car);
+                //model.adjustCarPosition();        notify case 1
+                notifyOb(1);
             }
-            model.ifCarCollideWithWorkshop();
-            model.handleCollition();
+            //model.ifCarCollideWithWorkshop();     notify case 2
+            //model.handleCollition();              notify case 3
+            notifyOb(2);
+            notifyOb(3);
             // repaint() calls the paintComponent method of the panel
             ui.getDrawPanel().repaint();
-
         }
+    }
+    public void notifyOb(int x) {
+        for(Observer ob : obs){
+            ob.update(x);
+        }
+    }
+    public void addObserver(Observer ob) {
+        obs.add(ob);
+    }
+    public void removeObserver(Observer ob) {
+        obs.remove(ob);
     }
 }

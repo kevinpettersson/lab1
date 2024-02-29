@@ -15,31 +15,19 @@ import javax.swing.event.ChangeListener;
 * modifying the model state and the updating the view.
  */
 
-public class CarController implements Observerables{
+public class CarController{
     private UI ui;
     private Model model;
     private Buttons buttons;
     private int gasAmount;
-    ArrayList<Observer> obs;
+
 
     public CarController(UI ui, Model model) {
         this.model = model;
         this.ui = ui;
         this.buttons = ui.getButtons();
         this.gasAmount = 0;
-        this.obs = new ArrayList<>();
-    }
 
-    public void notifyOb(int x, int gasAmount) {
-        for(Observer ob : obs){
-            ob.update(x, gasAmount);
-        }
-    }
-    public void addObserver(Observer ob) {
-        obs.add(ob);
-    }
-    public void removeObserver(Observer ob) {
-        obs.remove(ob);
     }
 
     public void actionListeners(){
@@ -51,38 +39,39 @@ public class CarController implements Observerables{
         });
         buttons.getAddCar().addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {notifyOb(1,0);
+            public void actionPerformed(ActionEvent e) {
+                model.addCar();
             }
         });
         buttons.getRemoveCar().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                notifyOb(2,0 );
+                model.removeCar();
             }
         });
         buttons.getGasButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                notifyOb(3, gasAmount);
+                model.gas(gasAmount);
             }
         });
         buttons.getBrakeButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                notifyOb(4, gasAmount);
+                model.brake(gasAmount);
             }
         });
 
         buttons.getTurboOnButton().addActionListener((new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                notifyOb(5,0);
+                model.saabTurboOn();
             }
         }));
         buttons.getTurboOffButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                notifyOb(6,0);
+                model.saabTurboOff();
             }
         });
 
@@ -90,13 +79,13 @@ public class CarController implements Observerables{
         buttons.getStartButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                notifyOb(7,0);
+                model.startEngineAll();
             }
         });
         buttons.getStopButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                notifyOb(8,0);
+                model.stopEngineAll();
             }
         });
 
@@ -104,13 +93,13 @@ public class CarController implements Observerables{
         buttons.getLiftBedButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                notifyOb(9,0);
+                model.liftAllBeds();
             }
         });
         buttons.getLowerBedButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                notifyOb(10,0);
+                model.lowerAllBeds();
             }
         });
     }
