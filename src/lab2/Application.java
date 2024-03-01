@@ -57,6 +57,7 @@ public class Application implements Observerables{
             ui.getDrawPanel().repaint();
         }
     }
+
     public void notifyOb(int x) {
         for(Observer ob : obs){
             ob.update(x);
