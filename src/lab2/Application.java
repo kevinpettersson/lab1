@@ -12,8 +12,7 @@ public class Application implements Observerables{
     private final  UI ui;
     private final Model model;
     private ArrayList<Car> cars;
-    // each step between delays.
-    private final int delay;
+
     private final Timer timer;
     ArrayList<Observer> obs;
 
@@ -23,10 +22,8 @@ public class Application implements Observerables{
         this.ui = new UI("Fast af", model);
         this.cc = new CarController(ui, model);
         this.cars = model.getCars();
-        // The delay (ms) corresponds to 20 updates a sec (hz)
-        this.delay = 50;
         // The timer is started with a listener (see below) that executes the statements
-        this.timer = new Timer(delay, new TimerListener());
+        this.timer = new Timer(model.getDelay(), new TimerListener());
         this.obs = new ArrayList<>();
     }
 

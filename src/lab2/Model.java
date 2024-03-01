@@ -8,12 +8,19 @@ public class Model implements Observer {
     public ArrayList<Car> cars;
     private final Workshop<Volvo240> volvo240Workshop;
     private final CarFactory carFactory;
+    // each step between delays.
+    private final int delay;
 
     public Model() {
+        // The delay (ms) corresponds to 20 updates a sec (hz)
+        this.delay = 50;
         this.cars = new ArrayList<Car>();
         this.volvo240Workshop = new Workshop<Volvo240>(10, new Point(300,300));
         this.carFactory = new CarFactory();
         initiateCars(cars);
+    }
+    public int getDelay(){
+        return this.delay;
     }
 
     public Workshop<Volvo240> getWorkshop(){
