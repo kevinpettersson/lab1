@@ -1,6 +1,10 @@
 package lab2;
 
+import lab1.Car;
+import lab1.CarTransport;
+
 import javax.swing.*;
+import java.util.Stack;
 
 public class Buttons {
     private final JLabel gasLabel;

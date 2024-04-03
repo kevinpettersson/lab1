@@ -1,5 +1,8 @@
 package lab1;
 
+import java.util.ArrayList;
+import java.util.Stack;
+
 public class Transform {
     protected double currentSpeed;
     private final double enginepower;

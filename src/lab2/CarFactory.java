@@ -27,6 +27,7 @@ public class CarFactory {
         Volvo240 volvo240 = new Volvo240();
         volvo240.setDirection(Direction.EAST);
         volvo240.setPos(x,y);
+        Car vo = new Volvo240();
         return volvo240;
     }
     private Saab95 createSaab95(int x, int y){

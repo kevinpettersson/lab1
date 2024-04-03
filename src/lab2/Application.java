@@ -29,6 +29,7 @@ public class Application implements Observerables{
 
     public static void main(String[] args) {
         // Instance of this class
+        ArrayList<? super Volvo240> list = new ArrayList<Volvo240>();
         Application app = new Application();
         app.obs.add(app.model);
 
